@@ -881,8 +881,8 @@
         badge: "Süper Fırsat",
         specs: "12V • 72 Ah • 680A CCA",
         dimensions: "278 x 175 x 190 mm",
-        oldPrice: 4450,
-        price: 3000,
+        oldPrice: 4850,
+        price: 4000,
         isBattery: true,
         accentColor: "#EF4444"
       },
@@ -900,3 +900,902 @@
         isBattery: true,
         accentColor: "#3B82F6"
       },
+      {
+        id: 4,
+        name: "İnci Akü 12V 60 Ah 540A Formul A Binek Akü",
+        brand: "İnci",
+        category: "Binek Araç Aküleri",
+        isWeeklyDeal: false,
+        badge: "Çok Satan",
+        specs: "12V • 60 Ah • 540A CCA",
+        dimensions: "242 x 175 x 190 mm",
+        oldPrice: 3400,
+        price: 2750,
+        isBattery: true,
+        accentColor: "#10B981"
+      },
+      {
+        id: 5,
+        name: "Yiğit Akü 12V 75 Ah 680A Prestige Serisi Akü",
+        brand: "Yiğit",
+        category: "Binek Araç Aküleri",
+        isWeeklyDeal: true,
+        badge: "Haftanın Yıldızı",
+        specs: "12V • 75 Ah • 680A CCA",
+        dimensions: "278 x 175 x 190 mm",
+        oldPrice: 4100,
+        price: 3190,
+        isBattery: true,
+        accentColor: "#F59E0B"
+      },
+      {
+        id: 6,
+        name: "Mutlu 12V 70 Ah 720A EFB Start-Stop Akü",
+        brand: "Mutlu",
+        category: "Start-Stop (AGM / EFB)",
+        isWeeklyDeal: false,
+        badge: "EFB Teknoloji",
+        specs: "12V • 70 Ah • 720A EFB",
+        dimensions: "278 x 175 x 190 mm",
+        oldPrice: 5400,
+        price: 4390,
+        isBattery: true,
+        accentColor: "#EF4444"
+      },
+      {
+        id: 7,
+        name: "Varta 12V 80 Ah 800A Silver Dynamic AGM Akü",
+        brand: "Varta",
+        category: "Start-Stop (AGM / EFB)",
+        isWeeklyDeal: true,
+        badge: "Premium AGM",
+        specs: "12V • 80 Ah • 800A AGM",
+        dimensions: "315 x 175 x 190 mm",
+        oldPrice: 7900,
+        price: 6450,
+        isBattery: true,
+        accentColor: "#3B82F6"
+      },
+      {
+        id: 8,
+        name: "İnci Akü 12V 105 Ah 850A Supr A Ağır Vasıta & Ticari",
+        brand: "İnci",
+        category: "Ağır Vasıta & Ticari",
+        isWeeklyDeal: false,
+        badge: "Ticari Güç",
+        specs: "12V • 105 Ah • 850A CCA",
+        dimensions: "353 x 175 x 190 mm",
+        oldPrice: 5800,
+        price: 4790,
+        isBattery: true,
+        accentColor: "#10B981"
+      },
+      {
+        id: 9,
+        name: "Mutlu 12V 135 Ah 950A Ağır Vasıta & Kamyon Aküsü",
+        brand: "Mutlu",
+        category: "Ağır Vasıta & Ticari",
+        isWeeklyDeal: true,
+        badge: "Filo Fırsatı",
+        specs: "12V • 135 Ah • 950A CCA",
+        dimensions: "513 x 189 x 223 mm",
+        oldPrice: 7600,
+        price: 6190,
+        isBattery: true,
+        accentColor: "#EF4444"
+      },
+      {
+        id: 10,
+        name: "Yiğit 12V 180 Ah 1150A Ağır Vasıta & Tır Aküsü",
+        brand: "Yiğit",
+        category: "Ağır Vasıta & Ticari",
+        isWeeklyDeal: false,
+        badge: "Maksimum Güç",
+        specs: "12V • 180 Ah • 1150A CCA",
+        dimensions: "518 x 222 x 242 mm",
+        oldPrice: 9400,
+        price: 7850,
+        isBattery: true,
+        accentColor: "#F59E0B"
+      },
+      {
+        id: 11,
+        name: "Varta 12V 12 Ah 200A Powersports AGM Motosiklet Aküsü",
+        brand: "Varta",
+        category: "Motosiklet & Marin",
+        isWeeklyDeal: false,
+        badge: "Kuru AGM",
+        specs: "12V • 12 Ah • 200A CCA",
+        dimensions: "150 x 87 x 145 mm",
+        oldPrice: 2100,
+        price: 1650,
+        isBattery: true,
+        accentColor: "#3B82F6"
+      },
+      {
+        id: 12,
+        name: "1200 Amper Bakır Korumalı Ağır Hizmet Akü Takviye Kablosu",
+        brand: "Yusem Pro",
+        category: "Takviye & Aksesuar",
+        isWeeklyDeal: true,
+        badge: "Bagaj Kurtarıcı",
+        specs: "3.5 Metre • Saf Bakır İletken • Çantalı",
+        dimensions: "3500 mm Kablo Boyu",
+        oldPrice: 890,
+        price: 590,
+        isBattery: false,
+        accentColor: "#FACC15"
+      }
+    ];
+
+    // ==========================================
+    // 2. UYGULAMA DURUMU (STATE)
+    // ==========================================
+    let state = {
+      selectedCategory: "Tümü",
+      selectedBrand: "Tümü",
+      searchQuery: "",
+      sortBy: "featured",
+      vehicleFilter: null,
+      cart: [],
+      checkoutStep: 1,
+      paymentMethod: "card"
+    };
+
+    // ==========================================
+    // 3. YARDIMCI FORMAT VE SENKRONİZASYON FONKSİYONLARI
+    // ==========================================
+    function formatTL(amount) {
+      return Number(amount).toLocaleString("tr-TR") + " TL";
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function syncHeroDealCard() {
+      const dealProduct = products.find(p => p.id === FEATURED_HERO_PRODUCT_ID) || products[0];
+      if (!dealProduct) return;
+
+      const brandEl = document.getElementById("heroDealBrand");
+      const titleEl = document.getElementById("heroDealTitle");
+      const oldPriceEl = document.getElementById("heroDealOldPrice");
+      const priceEl = document.getElementById("heroDealPrice");
+      const tradeInEl = document.getElementById("heroDealTradeIn");
+      const addBtnEl = document.getElementById("heroDealAddBtn");
+
+      if (brandEl) brandEl.textContent = `${dealProduct.brand} Akü • SFB Seri 2`;
+      if (titleEl) titleEl.textContent = dealProduct.name;
+      if (oldPriceEl) oldPriceEl.textContent = formatTL(dealProduct.oldPrice);
+      if (priceEl) priceEl.textContent = Number(dealProduct.price).toLocaleString("tr-TR");
+      if (tradeInEl) {
+        const netWithTradeIn = Math.max(0, dealProduct.price - TRADE_IN_DISCOUNT_PER_BATTERY);
+        tradeInEl.textContent = `Eski akü iadesiyle ${formatTL(netWithTradeIn)}!`;
+      }
+      if (addBtnEl) {
+        addBtnEl.setAttribute("onclick", `addToCart(${dealProduct.id})`);
+      }
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("toastNotification");
+      const toastText = document.getElementById("toastText");
+      if (!toast || !toastText) return;
+      toastText.textContent = message;
+      toast.classList.remove("opacity-0", "translate-y-2");
+      toast.classList.add("opacity-100");
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => {
+        toast.classList.remove("opacity-100");
+        toast.classList.add("opacity-0");
+      }, 2500);
+    }
+
+    // ==========================================
+    // 4. KATEGORİ, MARKA VE ÜRÜN LİSTELEME
+    // ==========================================
+    function renderCategoryTabs() {
+      const container = document.getElementById("categoryTabs");
+      if (!container) return;
+      container.innerHTML = categories.map(cat => {
+        const active = state.selectedCategory === cat.id;
+        return `
+          <button 
+            onclick="selectCategory('${cat.id}')" 
+            class="shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold border transition cursor-pointer ${
+              active 
+                ? "bg-brand-navy text-amber-400 border-brand-navy shadow-sm" 
+                : "bg-white text-slate-700 border-slate-200 hover:border-amber-400 hover:bg-amber-50/40"
+            }">
+            <span>${cat.icon}</span>
+            <span>${cat.label}</span>
+          </button>
+        `;
+      }).join("");
+    }
+
+    function renderBrandFilters() {
+      const container = document.getElementById("brandFilters");
+      if (!container) return;
+      const brands = ["Tümü", "Mutlu", "Varta", "İnci", "Yiğit", "Yusem Pro"];
+      container.innerHTML = brands.map(brand => {
+        const active = state.selectedBrand === brand;
+        return `
+          <button 
+            onclick="selectBrand('${brand}')" 
+            class="shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer ${
+              active 
+                ? "bg-amber-400 text-slate-950 shadow-xs" 
+                : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+            }">
+            ${brand}
+          </button>
+        `;
+      }).join("");
+    }
+
+    function getFilteredProducts() {
+      let list = [...products];
+
+      if (state.selectedCategory === "Haftanın Fırsatları") {
+        list = list.filter(p => p.isWeeklyDeal);
+      } else if (state.selectedCategory !== "Tümü") {
+        list = list.filter(p => p.category === state.selectedCategory);
+      }
+
+      if (state.selectedBrand !== "Tümü") {
+        list = list.filter(p => p.brand === state.selectedBrand);
+      }
+
+      if (state.vehicleFilter) {
+        if (state.vehicleFilter === "benzin") {
+          list = list.filter(p => p.category === "Binek Araç Aküleri" && p.name.includes("60 Ah"));
+        } else if (state.vehicleFilter === "dizel") {
+          list = list.filter(p => p.category === "Binek Araç Aküleri" && (p.name.includes("72 Ah") || p.name.includes("75 Ah")));
+        } else if (state.vehicleFilter === "startstop") {
+          list = list.filter(p => p.category === "Start-Stop (AGM / EFB)");
+        } else if (state.vehicleFilter === "ticari") {
+          list = list.filter(p => p.category === "Ağır Vasıta & Ticari");
+        }
+      }
+
+      if (state.searchQuery.trim() !== "") {
+        const q = state.searchQuery.toLowerCase().trim();
+        list = list.filter(p =>
+          p.name.toLowerCase().includes(q) ||
+          p.brand.toLowerCase().includes(q) ||
+          p.category.toLowerCase().includes(q) ||
+          p.specs.toLowerCase().includes(q)
+        );
+      }
+
+      if (state.sortBy === "price-asc") {
+        list.sort((a, b) => a.price - b.price);
+      } else if (state.sortBy === "price-desc") {
+        list.sort((a, b) => b.price - a.price);
+      } else if (state.sortBy === "discount") {
+        list.sort((a, b) => {
+          const discA = (a.oldPrice - a.price) / a.oldPrice;
+          const discB = (b.oldPrice - b.price) / b.oldPrice;
+          return discB - discA;
+        });
+      }
+
+      return list;
+    }
+
+    function renderProducts() {
+      const grid = document.getElementById("productGrid");
+      const emptyState = document.getElementById("emptyState");
+      const countLabel = document.getElementById("productCountLabel");
+      if (!grid) return;
+
+      const filtered = getFilteredProducts();
+      if (countLabel) countLabel.textContent = `${filtered.length} ürün listeleniyor`;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = "";
+        if (emptyState) emptyState.classList.remove("hidden");
+        return;
+      }
+
+      if (emptyState) emptyState.classList.add("hidden");
+
+      grid.innerHTML = filtered.map(product => {
+        const discountPercent = Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100);
+        const tradeInPrice = Math.max(0, product.price - TRADE_IN_DISCOUNT_PER_BATTERY);
+
+        return `
+          <article class="bg-white rounded-2xl border border-slate-200/90 shadow-xs hover:shadow-xl hover:border-amber-400/80 transition-all duration-200 flex flex-col justify-between overflow-hidden group">
+            <div>
+              <!-- Üst Rozetler -->
+              <div class="p-3.5 pb-0 flex items-center justify-between gap-2">
+                <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-[11px] font-black uppercase tracking-wide ${
+                  product.isWeeklyDeal ? "bg-red-600 text-white" : "bg-brand-navy text-amber-400"
+                }">
+                  ${escapeHtml(product.badge)}
+                </span>
+                <span class="bg-emerald-100 text-emerald-800 text-[11px] font-extrabold px-2 py-0.5 rounded-md">
+                  %${discountPercent} İndirim
+                </span>
+              </div>
+
+              <!-- Akü / Aksesuar SVG Görsel Alanı -->
+              <div class="px-4 py-4 flex items-center justify-center bg-gradient-to-b from-slate-50/50 to-white">
+                <div class="w-32 h-24 rounded-xl bg-slate-900 flex items-center justify-center p-2.5 shadow-inner group-hover:scale-105 transition-transform">
+                  ${product.isBattery ? `
+                    <svg viewBox="0 0 120 90" class="w-full h-full">
+                      <rect x="12" y="20" width="96" height="58" rx="7" fill="#1E293B" stroke="${product.accentColor}" stroke-width="3"/>
+                      <rect x="24" y="11" width="16" height="9" rx="2" fill="#EF4444"/>
+                      <rect x="80" y="11" width="16" height="9" rx="2" fill="#94A3B8"/>
+                      <rect x="22" y="32" width="76" height="34" rx="4" fill="#0B192C"/>
+                      <text x="60" y="47" fill="#FACC15" font-size="11" font-weight="900" text-anchor="middle">${escapeHtml(product.brand.toUpperCase())}</text>
+                      <text x="60" y="60" fill="#E2E8F0" font-size="9.5" font-weight="700" text-anchor="middle">${escapeHtml(product.specs.split("•")[1]?.trim() || "12V AKÜ")}</text>
+                    </svg>
+                  ` : `
+                    <svg viewBox="0 0 120 90" class="w-full h-full">
+                      <path d="M25 65 C 25 25, 95 25, 95 65" fill="none" stroke="#EF4444" stroke-width="6" stroke-linecap="round"/>
+                      <path d="M32 70 C 32 35, 88 35, 88 70" fill="none" stroke="#FACC15" stroke-width="5" stroke-linecap="round"/>
+                      <rect x="18" y="60" width="16" height="14" rx="3" fill="#EF4444"/>
+                      <rect x="86" y="60" width="16" height="14" rx="3" fill="#1E293B" stroke="#FACC15" stroke-width="2"/>
+                    </svg>
+                  `}
+                </div>
+              </div>
+
+              <!-- Ürün Bilgileri -->
+              <div class="px-4 pb-3 space-y-1.5">
+                <div class="flex items-center justify-between text-[11px] font-bold text-slate-400">
+                  <span>${escapeHtml(product.brand)}</span>
+                  <span>${escapeHtml(product.category)}</span>
+                </div>
+                <h3 class="font-extrabold text-slate-900 text-sm sm:text-[15px] leading-snug line-clamp-2 min-h-[40px]">
+                  ${escapeHtml(product.name)}
+                </h3>
+                <div class="text-xs font-semibold text-slate-600 bg-slate-100 rounded-lg px-2.5 py-1.5">
+                  ${escapeHtml(product.specs)}
+                </div>
+                <div class="text-[11px] text-slate-400">Ölçü: ${escapeHtml(product.dimensions)}</div>
+              </div>
+            </div>
+
+            <!-- Alt Fiyat & Sepete Ekle Alanı -->
+            <div class="p-4 pt-3 border-t border-slate-100 bg-slate-50/70 space-y-2.5">
+              <div class="flex items-end justify-between">
+                <div>
+                  <div class="text-xs text-slate-400 line-through">${formatTL(product.oldPrice)}</div>
+                  <div class="text-xl font-black text-slate-950">${formatTL(product.price)}</div>
+                  ${product.isBattery ? `
+                    <div class="text-[11px] font-bold text-emerald-700">Eski akü iadesiyle ${formatTL(tradeInPrice)}</div>
+                  ` : `
+                    <div class="text-[11px] font-semibold text-slate-500">Ücretsiz Kargo</div>
+                  `}
+                </div>
+                <button 
+                  onclick="addToCart(${product.id})" 
+                  class="bg-amber-400 hover:bg-amber-300 active:scale-95 text-slate-950 font-black text-xs px-3.5 py-2.5 rounded-xl shadow-xs transition cursor-pointer">
+                  + Sepete Ekle
+                </button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    // ==========================================
+    // 5. FİLTRELEME & ARAMA AKSİYONLARI
+    // ==========================================
+    function selectCategory(catId) {
+      state.selectedCategory = catId;
+      state.vehicleFilter = null;
+      const recBox = document.getElementById("recommendationBox");
+      if (recBox) recBox.classList.add("hidden");
+      renderCategoryTabs();
+      renderProducts();
+    }
+
+    function selectBrand(brand) {
+      state.selectedBrand = brand;
+      renderBrandFilters();
+      renderProducts();
+    }
+
+    function handleSearch(val) {
+      state.searchQuery = val;
+      const dInput = document.getElementById("searchInputDesktop");
+      const mInput = document.getElementById("searchInputMobile");
+      const dClear = document.getElementById("clearSearchDesktop");
+      const mClear = document.getElementById("clearSearchMobile");
+
+      if (dInput && dInput.value !== val) dInput.value = val;
+      if (mInput && mInput.value !== val) mInput.value = val;
+
+      if (val.trim().length > 0) {
+        if (dClear) dClear.classList.remove("hidden");
+        if (mClear) mClear.classList.remove("hidden");
+      } else {
+        if (dClear) dClear.classList.add("hidden");
+        if (mClear) mClear.classList.add("hidden");
+      }
+      renderProducts();
+    }
+
+    function clearSearch() {
+      handleSearch("");
+    }
+
+    function handleSort(val) {
+      state.sortBy = val;
+      renderProducts();
+    }
+
+    function recommendBattery(type) {
+      state.vehicleFilter = type;
+      state.selectedCategory = "Tümü";
+      state.selectedBrand = "Tümü";
+      renderCategoryTabs();
+      renderBrandFilters();
+      renderProducts();
+
+      const box = document.getElementById("recommendationBox");
+      const text = document.getElementById("recommendationText");
+      const messages = {
+        benzin: "🚗 <strong>Binek Benzinli Araçlar</strong> için standart <strong>12V 60 Ah</strong> aküler önerilir. Uyumlu modeller aşağıda listelendi.",
+        dizel: "🚙 <strong>Binek Dizel Araçlar</strong> yüksek marş akımı istediği için <strong>12V 72 Ah - 75 Ah</strong> aküler önerilir.",
+        startstop: "⚡ <strong>Start-Stop Özelliğine Sahip Araçlar</strong> için mutlaka <strong>AGM veya EFB</strong> teknolojili akü kullanmalısınız.",
+        ticari: "🚚 <strong>Hafif Ticari, Kamyonet ve Ağır Vasıtalar</strong> için <strong>105 Ah - 180 Ah</strong> ağır hizmet aküleri listelendi."
+      };
+      if (text) text.innerHTML = messages[type] || "";
+      if (box) box.classList.remove("hidden");
+
+      const katalogEl = document.getElementById("katalog");
+      if (katalogEl) katalogEl.scrollIntoView({ behavior: "smooth" });
+    }
+
+    function clearRecommendation() {
+      state.vehicleFilter = null;
+      const box = document.getElementById("recommendationBox");
+      if (box) box.classList.add("hidden");
+      renderProducts();
+    }
+
+    function resetFilters() {
+      state.selectedCategory = "Tümü";
+      state.selectedBrand = "Tümü";
+      state.searchQuery = "";
+      state.sortBy = "featured";
+      state.vehicleFilter = null;
+      const dInput = document.getElementById("searchInputDesktop");
+      const mInput = document.getElementById("searchInputMobile");
+      if (dInput) dInput.value = "";
+      if (mInput) mInput.value = "";
+      const recBox = document.getElementById("recommendationBox");
+      if (recBox) recBox.classList.add("hidden");
+      renderCategoryTabs();
+      renderBrandFilters();
+      renderProducts();
+    }
+
+    // ==========================================
+    // 6. SEPET & HESAPLAMA YÖNETİMİ
+    // ==========================================
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+
+      const existing = state.cart.find(item => item.id === productId);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        state.cart.push({ id: product.id, qty: 1 });
+      }
+
+      updateCartBadge();
+      renderCart();
+      showToast(`"${product.name}" sepete eklendi!`);
+    }
+
+    function updateQty(productId, delta) {
+      const idx = state.cart.findIndex(item => item.id === productId);
+      if (idx === -1) return;
+      state.cart[idx].qty += delta;
+      if (state.cart[idx].qty <= 0) {
+        state.cart.splice(idx, 1);
+      }
+      updateCartBadge();
+      renderCart();
+    }
+
+    function updateCartBadge() {
+      const totalItems = state.cart.reduce((sum, item) => sum + item.qty, 0);
+      const badge = document.getElementById("cartBadge");
+      if (badge) badge.textContent = totalItems;
+    }
+
+    function calculateTotals() {
+      let subtotal = 0;
+      let batteryCount = 0;
+
+      state.cart.forEach(item => {
+        const p = products.find(prod => prod.id === item.id);
+        if (p) {
+          subtotal += p.price * item.qty;
+          if (p.isBattery) batteryCount += item.qty;
+        }
+      });
+
+      const tradeInChecked = document.getElementById("tradeInCheckbox")?.checked ?? true;
+      const discount = tradeInChecked ? batteryCount * TRADE_IN_DISCOUNT_PER_BATTERY : 0;
+      const grandTotal = Math.max(0, subtotal - discount);
+
+      return { subtotal, batteryCount, discount, grandTotal };
+    }
+
+    function toggleCart(open) {
+      const drawer = document.getElementById("cartDrawer");
+      if (!drawer) return;
+      if (open) {
+        drawer.classList.remove("hidden");
+        renderCart();
+      } else {
+        drawer.classList.add("hidden");
+      }
+    }
+
+    function setCheckoutStep(step) {
+      state.checkoutStep = step;
+      renderCart();
+    }
+
+    function goToPaymentStep() {
+      if (state.cart.length === 0) return;
+      state.checkoutStep = 2;
+      renderCart();
+      const scrollBody = document.getElementById("drawerScrollBody");
+      if (scrollBody) scrollBody.scrollTop = 0;
+    }
+
+    function renderCart() {
+      const emptyMsg = document.getElementById("emptyCartMessage");
+      const step1 = document.getElementById("step1Container");
+      const step2 = document.getElementById("step2Container");
+      const stepper = document.getElementById("checkoutStepper");
+      const footer = document.getElementById("cartFooter");
+      const proceedBtn = document.getElementById("proceedToPayBtn");
+      const completeBtn = document.getElementById("completeCardPaymentBtn");
+
+      if (state.cart.length === 0) {
+        if (emptyMsg) emptyMsg.classList.remove("hidden");
+        if (step1) step1.classList.add("hidden");
+        if (step2) step2.classList.add("hidden");
+        if (stepper) {
+          stepper.classList.add("hidden");
+          stepper.classList.remove("grid");
+        }
+        if (footer) footer.classList.add("hidden");
+        state.checkoutStep = 1;
+        return;
+      }
+
+      if (emptyMsg) emptyMsg.classList.add("hidden");
+      if (stepper) {
+        stepper.classList.remove("hidden");
+        stepper.classList.add("grid");
+      }
+      if (footer) footer.classList.remove("hidden");
+
+      const { subtotal, discount, grandTotal } = calculateTotals();
+
+      // Sepet ürün listesini çiz
+      const itemsContainer = document.getElementById("cartItemsContainer");
+      if (itemsContainer) {
+        itemsContainer.innerHTML = state.cart.map(item => {
+          const p = products.find(prod => prod.id === item.id);
+          if (!p) return "";
+          return `
+            <div class="bg-white border border-slate-200 rounded-xl p-3 flex items-center justify-between gap-3">
+              <div class="min-w-0">
+                <div class="text-[11px] font-bold text-amber-600">${escapeHtml(p.brand)} • ${escapeHtml(p.specs.split("•")[1]?.trim() || p.category)}</div>
+                <div class="text-xs sm:text-sm font-extrabold text-slate-900 truncate">${escapeHtml(p.name)}</div>
+                <div class="text-xs font-black text-slate-800 mt-1">${formatTL(p.price * item.qty)}</div>
+              </div>
+              <div class="flex items-center gap-1.5 shrink-0 bg-slate-100 p-1 rounded-xl border border-slate-200">
+                <button onclick="updateQty(${p.id}, -1)" class="w-7 h-7 rounded-lg bg-white hover:bg-slate-200 font-black text-slate-800 cursor-pointer">-</button>
+                <span class="w-6 text-center text-xs font-black text-slate-900">${item.qty}</span>
+                <button onclick="updateQty(${p.id}, 1)" class="w-7 h-7 rounded-lg bg-amber-400 hover:bg-amber-300 font-black text-slate-950 cursor-pointer">+</button>
+              </div>
+            </div>
+          `;
+        }).join("");
+      }
+
+      const subEl = document.getElementById("subtotalText");
+      const discEl = document.getElementById("tradeInDiscountText");
+      const grandEl = document.getElementById("grandTotalText");
+      const step2Badge = document.getElementById("step2TotalBadge");
+      const payBtnLabel = document.getElementById("payButtonLabel");
+
+      if (subEl) subEl.textContent = formatTL(subtotal);
+      if (discEl) discEl.textContent = `-${formatTL(discount)}`;
+      if (grandEl) grandEl.textContent = formatTL(grandTotal);
+      if (step2Badge) step2Badge.textContent = formatTL(grandTotal);
+      if (payBtnLabel) {
+        payBtnLabel.textContent = state.paymentMethod === "card"
+          ? `🔒 ${formatTL(grandTotal)} Güvenli Ödemeyi Tamamla`
+          : `🏦 ${formatTL(grandTotal)} Havale / EFT Siparişini Onayla`;
+      }
+
+      updateInstallmentOptions(grandTotal);
+
+      const stepBtn1 = document.getElementById("stepBtn1");
+      const stepBtn2 = document.getElementById("stepBtn2");
+
+      if (state.checkoutStep === 1) {
+        if (step1) step1.classList.remove("hidden");
+        if (step2) step2.classList.add("hidden");
+        if (proceedBtn) proceedBtn.classList.remove("hidden");
+        if (completeBtn) completeBtn.classList.add("hidden");
+        if (stepBtn1) stepBtn1.className = "flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg bg-amber-400 text-slate-950 transition cursor-pointer";
+        if (stepBtn2) stepBtn2.className = "flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg bg-slate-800 text-slate-300 transition cursor-pointer";
+      } else {
+        if (step1) step1.classList.add("hidden");
+        if (step2) step2.classList.remove("hidden");
+        if (proceedBtn) proceedBtn.classList.add("hidden");
+        if (completeBtn) completeBtn.classList.remove("hidden");
+        if (stepBtn1) stepBtn1.className = "flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg bg-slate-800 text-slate-300 transition cursor-pointer";
+        if (stepBtn2) stepBtn2.className = "flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg bg-amber-400 text-slate-950 transition cursor-pointer";
+      }
+    }
+
+    // ==========================================
+    // 7. KART BİLGİLERİ, 3D ÖNİZLEME & ÖDEME AKIŞI
+    // ==========================================
+    function selectPaymentTab(method) {
+      state.paymentMethod = method;
+      const cardTab = document.getElementById("payTabCard");
+      const eftTab = document.getElementById("payTabEft");
+      const cardForm = document.getElementById("creditCardFormSection");
+      const eftForm = document.getElementById("eftFormSection");
+
+      if (method === "card") {
+        if (cardTab) cardTab.className = "p-2.5 rounded-xl border-2 border-amber-500 bg-amber-50/70 text-left transition cursor-pointer";
+        if (eftTab) eftTab.className = "p-2.5 rounded-xl border border-slate-200 bg-white text-left hover:border-slate-300 transition cursor-pointer";
+        if (cardForm) cardForm.classList.remove("hidden");
+        if (eftForm) eftForm.classList.add("hidden");
+      } else {
+        if (eftTab) eftTab.className = "p-2.5 rounded-xl border-2 border-amber-500 bg-amber-50/70 text-left transition cursor-pointer";
+        if (cardTab) cardTab.className = "p-2.5 rounded-xl border border-slate-200 bg-white text-left hover:border-slate-300 transition cursor-pointer";
+        if (eftForm) eftForm.classList.remove("hidden");
+        if (cardForm) cardForm.classList.add("hidden");
+      }
+      renderCart();
+    }
+
+    function flipCard(toBack) {
+      const inner = document.getElementById("visualCardInner");
+      if (!inner) return;
+      if (toBack) {
+        inner.classList.add("rotate-y-180");
+      } else {
+        inner.classList.remove("rotate-y-180");
+      }
+    }
+
+    function handleCardHolderInput(val) {
+      const el = document.getElementById("visualCardHolder");
+      if (el) el.textContent = val.trim() ? val.toUpperCase() : "AD SOYAD";
+    }
+
+    function handleCardNumberInput(input) {
+      let digits = input.value.replace(/\D/g, "").slice(0, 16);
+      let formatted = digits.replace(/(.{4})/g, "$1 ").trim();
+      input.value = formatted;
+
+      const visual = document.getElementById("visualCardNumber");
+      if (visual) {
+        visual.textContent = formatted || "•••• •••• •••• ••••";
+      }
+
+      const badge = document.getElementById("cardBrandBadge");
+      if (badge) {
+        if (digits.startsWith("4")) {
+          badge.textContent = "VISA";
+        } else if (/^5[1-5]/.test(digits) || /^2[2-7]/.test(digits)) {
+          badge.textContent = "MASTERCARD";
+        } else if (digits.startsWith("9792") || digits.startsWith("65")) {
+          badge.textContent = "TROY";
+        } else {
+          badge.textContent = "BANKA / KREDİ KARTI";
+        }
+      }
+    }
+
+    function handleCardExpiryInput(input) {
+      let digits = input.value.replace(/\D/g, "").slice(0, 4);
+      if (digits.length >= 3) {
+        input.value = digits.slice(0, 2) + "/" + digits.slice(2);
+      } else {
+        input.value = digits;
+      }
+      const visual = document.getElementById("visualCardExpiry");
+      if (visual) visual.textContent = input.value || "AA/YY";
+    }
+
+    function handleCardCvvInput(input) {
+      let digits = input.value.replace(/\D/g, "").slice(0, 4);
+      input.value = digits;
+      const visual = document.getElementById("visualCardCvv");
+      if (visual) visual.textContent = digits || "•••";
+    }
+
+    function updateInstallmentOptions(total) {
+      const select = document.getElementById("installmentSelect");
+      if (!select) return;
+      const currentVal = select.value || "1";
+      const options = [
+        { count: 1, label: `Tek Çekim — ${formatTL(total)}` },
+        { count: 3, label: `3 Taksit — 3 x ${formatTL(Math.ceil(total / 3))} (Peşin Fiyatına)` },
+        { count: 6, label: `6 Taksit — 6 x ${formatTL(Math.ceil((total * 1.04) / 6))}` },
+        { count: 9, label: `9 Taksit — 9 x ${formatTL(Math.ceil((total * 1.07) / 9))}` }
+      ];
+      select.innerHTML = options.map(opt => `<option value="${opt.count}">${opt.label}</option>`).join("");
+      select.value = currentVal;
+    }
+
+    function showFormError(msg) {
+      const box = document.getElementById("formErrorBox");
+      if (!box) return;
+      if (!msg) {
+        box.classList.add("hidden");
+        box.textContent = "";
+      } else {
+        box.textContent = msg;
+        box.classList.remove("hidden");
+      }
+    }
+
+    function processOnlinePayment() {
+      showFormError("");
+      const name = document.getElementById("custName")?.value.trim();
+      const phone = document.getElementById("custPhone")?.value.trim();
+      const address = document.getElementById("custAddress")?.value.trim();
+
+      if (!name || !phone || !address) {
+        showFormError("Lütfen Ad Soyad, Telefon ve Teslimat Adresi alanlarını eksiksiz doldurun.");
+        return;
+      }
+
+      const { grandTotal } = calculateTotals();
+
+      if (state.paymentMethod === "card") {
+        const holder = document.getElementById("cardHolderInput")?.value.trim();
+        const cardDigits = (document.getElementById("cardNumberInput")?.value || "").replace(/\D/g, "");
+        const expiry = document.getElementById("cardExpiryInput")?.value.trim();
+        const cvv = (document.getElementById("cardCvvInput")?.value || "").replace(/\D/g, "");
+
+        if (!holder || cardDigits.length < 16 || expiry.length < 5 || cvv.length < 3) {
+          showFormError("Lütfen kart üzerindeki ad soyad, 16 haneli kart numarası, son kullanma tarihi ve CVV kodunu kontrol edin.");
+          return;
+        }
+
+        const secure3d = document.getElementById("secure3dCheck")?.checked;
+        if (secure3d) {
+          const modal = document.getElementById("secure3dModal");
+          const amountEl = document.getElementById("modal3dAmount");
+          const maskEl = document.getElementById("modal3dCardMask");
+          if (amountEl) amountEl.textContent = formatTL(grandTotal);
+          if (maskEl) maskEl.textContent = `•••• •••• •••• ${cardDigits.slice(-4)}`;
+          if (modal) modal.classList.remove("hidden");
+          return;
+        }
+      }
+
+      finalizeOrderReceipt();
+    }
+
+    function cancel3dModal() {
+      const modal = document.getElementById("secure3dModal");
+      if (modal) modal.classList.add("hidden");
+    }
+
+    function confirm3dPayment() {
+      cancel3dModal();
+      finalizeOrderReceipt();
+    }
+
+    function finalizeOrderReceipt() {
+      const name = document.getElementById("custName")?.value.trim() || "-";
+      const phone = document.getElementById("custPhone")?.value.trim() || "-";
+      const car = document.getElementById("custCar")?.value.trim() || "Belirtilmedi";
+      const deliveryType = document.getElementById("deliveryTypeSelect")?.value || "Adrese Hızlı Kargo";
+      const address = document.getElementById("custAddress")?.value.trim() || "-";
+      const tradeInChecked = document.getElementById("tradeInCheckbox")?.checked ?? true;
+      const { subtotal, discount, grandTotal } = calculateTotals();
+
+      const orderNo = `YA-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+      const cardDigits = (document.getElementById("cardNumberInput")?.value || "").replace(/\D/g, "");
+      const instCount = document.getElementById("installmentSelect")?.value || "1";
+
+      const paymentDesc = state.paymentMethod === "card"
+        ? `Online Kredi/Banka Kartı (•••• ${cardDigits.slice(-4)} • ${instCount === "1" ? "Tek Çekim" : instCount + " Taksit"}) - ONAYLANDI`
+        : "Havale / EFT Ödeme Bildirimi";
+
+      const itemLines = state.cart.map(item => {
+        const p = products.find(prod => prod.id === item.id);
+        return p ? `• ${item.qty}x ${p.name} (${formatTL(p.price * item.qty)})` : "";
+      }).filter(Boolean).join("\n");
+
+      const receiptText = [
+        `⚡ YUSEM AKÜ — SİPARİŞ & ÖDEME MAKBUZU`,
+        `Sipariş No: #${orderNo}`,
+        `----------------------------------------`,
+        `Müşteri: ${name}`,
+        `Telefon: ${phone}`,
+        `Araç: ${car}`,
+        `Teslimat: ${deliveryType}`,
+        `Adres: ${address}`,
+        `----------------------------------------`,
+        `ÜRÜNLER:`,
+        itemLines,
+        `----------------------------------------`,
+        `Ara Toplam: ${formatTL(subtotal)}`,
+        `Eski Akü İadesi: ${tradeInChecked ? "-" + formatTL(discount) + " (Teslimatta verilecek)" : "Yok"}`,
+        `ÖDENEN NET TUTAR: ${formatTL(grandTotal)}`,
+        `Ödeme Durumu: ${paymentDesc}`
+      ].join("\n");
+
+      const titleEl = document.getElementById("receiptModalTitle");
+      const orderNumEl = document.getElementById("receiptOrderNumber");
+      const previewEl = document.getElementById("orderMessagePreview");
+      const waLinkEl = document.getElementById("directWhatsAppLink");
+
+      if (titleEl) titleEl.textContent = state.paymentMethod === "card" ? "Kart Ödemesi & Sipariş Onaylandı!" : "Havale/EFT Siparişi Oluşturuldu!";
+      if (orderNumEl) orderNumEl.textContent = `Sipariş No: #${orderNo}`;
+      if (previewEl) previewEl.textContent = receiptText;
+      if (waLinkEl) waLinkEl.href = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(receiptText)}`;
+
+      toggleCart(false);
+      const receiptModal = document.getElementById("orderPreviewModal");
+      if (receiptModal) receiptModal.classList.remove("hidden");
+
+      // Sepeti sıfırla
+      state.cart = [];
+      state.checkoutStep = 1;
+      updateCartBadge();
+    }
+
+    function closeOrderModal() {
+      const modal = document.getElementById("orderPreviewModal");
+      if (modal) modal.classList.add("hidden");
+    }
+
+    function copyOrderText() {
+      const previewEl = document.getElementById("orderMessagePreview");
+      if (!previewEl) return;
+      const tempArea = document.createElement("textarea");
+      tempArea.value = previewEl.textContent;
+      document.body.appendChild(tempArea);
+      tempArea.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempArea);
+      showToast("Sipariş makbuzu panoya kopyalandı!");
+    }
+
+    // ==========================================
+    // 8. SAYFA İLK YÜKLEME BAŞLATICI
+    // ==========================================
+    window.addEventListener("DOMContentLoaded", () => {
+      syncHeroDealCard();
+      renderCategoryTabs();
+      renderBrandFilters();
+      renderProducts();
+      updateCartBadge();
+    });
+  </script>
+</body>
+</html>
