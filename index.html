@@ -846,38 +846,57 @@
     const DISPLAY_PHONE = "0534 920 99 07";
     const TRADE_IN_DISCOUNT_PER_BATTERY = 350; // Eski akü iade indirimi (TL)
     const FEATURED_HERO_PRODUCT_ID = 2; // Sağ üstteki "Haftanın Süper Fırsatı" kutusunda görünecek ürünün ID'si
-// ... existing code ... -->
-    // ==========================================
-    // 7. BAŞLANGIÇ ÇALIŞTIRMA & HERO BANNER SENKRONİZASYONU
-    // ==========================================
-    function syncHeroFeaturedDeal(productId = FEATURED_HERO_PRODUCT_ID) {
-      const dealProduct = products.find(p => p.id === productId) || products[0];
-      if (!dealProduct) return;
 
-      const brandEl = document.getElementById("heroDealBrand");
-      const titleEl = document.getElementById("heroDealTitle");
-      const oldPriceEl = document.getElementById("heroDealOldPrice");
-      const priceEl = document.getElementById("heroDealPrice");
-      const tradeInEl = document.getElementById("heroDealTradeIn");
-      const btnEl = document.getElementById("heroDealAddBtn");
+    const categories = [
+      { id: "Tümü", label: "Tüm Ürünler", icon: "⚡" },
+      { id: "Haftanın Fırsatları", label: "Haftanın Fırsatları", icon: "🔥" },
+      { id: "Binek Araç Aküleri", label: "Binek Araç Aküleri", icon: "🚗" },
+      { id: "Start-Stop (AGM / EFB)", label: "Start-Stop (AGM / EFB)", icon: "🔋" },
+      { id: "Ağır Vasıta & Ticari", label: "Ağır Vasıta & Ticari", icon: "🚚" },
+      { id: "Motosiklet & Marin", label: "Motosiklet & Marin", icon: "🏍️" },
+      { id: "Takviye & Aksesuar", label: "Takviye & Aksesuar", icon: "🔌" }
+    ];
 
-      if (brandEl) brandEl.textContent = `${dealProduct.brand.toUpperCase()} • ${dealProduct.badge.toUpperCase()}`;
-      if (titleEl) titleEl.textContent = dealProduct.name;
-      if (oldPriceEl) oldPriceEl.textContent = formatPrice(dealProduct.oldPrice);
-      if (priceEl) priceEl.textContent = dealProduct.price.toLocaleString("tr-TR");
-      if (tradeInEl) {
-        const netTradeIn = Math.max(0, dealProduct.price - TRADE_IN_DISCOUNT_PER_BATTERY);
-        tradeInEl.textContent = `Eski akü iadesiyle ${formatPrice(netTradeIn)}!`;
-      }
-      if (btnEl) btnEl.setAttribute("onclick", `addToCart(${dealProduct.id})`);
-    }
-
-    window.addEventListener("DOMContentLoaded", () => {
-      syncHeroFeaturedDeal(FEATURED_HERO_PRODUCT_ID);
-      renderCategoryTabs();
-      renderBrandFilters();
-      renderProducts();
-    });
-  </script>
-</body>
-</html>
+    const products = [
+      {
+        id: 1,
+        name: "Mutlu 12V 60 Ah 540A SFB Seri 2 Binek Akü",
+        brand: "Mutlu",
+        category: "Binek Araç Aküleri",
+        isWeeklyDeal: true,
+        badge: "Haftanın Yıldızı",
+        specs: "12V • 60 Ah • 540A CCA",
+        dimensions: "242 x 175 x 190 mm",
+        oldPrice: 3650,
+        price: 2890,
+        isBattery: true,
+        accentColor: "#EF4444"
+      },
+      {
+        id: 2,
+        name: "Mutlu 12V 72 Ah 680A SFB Seri 2 Dizel & Binek Akü",
+        brand: "Mutlu",
+        category: "Binek Araç Aküleri",
+        isWeeklyDeal: true,
+        badge: "Süper Fırsat",
+        specs: "12V • 72 Ah • 680A CCA",
+        dimensions: "278 x 175 x 190 mm",
+        oldPrice: 4450,
+        price: 2000,
+        isBattery: true,
+        accentColor: "#EF4444"
+      },
+      {
+        id: 3,
+        name: "Varta 12V 70 Ah 760A Silver Dynamic AGM Start-Stop",
+        brand: "Varta",
+        category: "Start-Stop (AGM / EFB)",
+        isWeeklyDeal: true,
+        badge: "Start-Stop Özel",
+        specs: "12V • 70 Ah • 760A AGM",
+        dimensions: "278 x 175 x 190 mm",
+        oldPrice: 6800,
+        price: 5490,
+        isBattery: true,
+        accentColor: "#3B82F6"
+      },
