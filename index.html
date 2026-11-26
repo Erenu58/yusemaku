@@ -1,0 +1,1778 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yusem Akü | Online Akü Mağazası & Güvenli Kartla Ödeme - yusemaku.vercel.app</title>
+  <meta name="description" content="Yusem Akü ile Mutlu, Varta, İnci ve Yiğit akü çeşitlerinde haftanın fırsatları, eski akü iade indirimi ve güvenli kredi kartı ile online alışveriş!" />
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              navy: '#0B192C',
+              dark: '#060F1D',
+              blue: '#1E3E62',
+              amber: '#F59E0B',
+              yellow: '#FACC15',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Özel kaydırma çubuğu ve yumuşak geçişler */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.45); }
+      50% { box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); }
+    }
+    .animate-pulse-glow {
+      animation: pulseGlow 2.2s infinite;
+    }
+    /* 3D Kredi Kartı Çevirme Animasyonu */
+    .perspective-1000 {
+      perspective: 1000px;
+    }
+    .preserve-3d {
+      transform-style: preserve-3d;
+      transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
+    }
+    .backface-hidden {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .rotate-y-180 {
+      transform: rotateY(180deg);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-amber-400 selection:text-slate-950">
+
+  <!-- ÜST DUYURU BANDI -->
+  <div class="bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 text-slate-950 text-xs sm:text-sm font-bold py-2 px-4">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1 text-center">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-extrabold bg-slate-950 text-amber-400 uppercase tracking-wide">Online Sipariş</span>
+        <span>Türkiye Geneli Hızlı Kargo & Yerinde Teslimat</span>
+      </div>
+      <div class="hidden md:flex items-center gap-4 text-xs font-extrabold">
+        <span>⚡ Eski Akü İadesinde Ürün Başı 350 TL Ekstra İndirim!</span>
+        <span>•</span>
+        <span>💳 Tüm Kartlara 9 Taksit İmkanı</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANA ÜST MENÜ (HEADER) -->
+  <header class="sticky top-0 z-40 bg-brand-navy text-white shadow-lg border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 py-3.5">
+      <div class="flex items-center justify-between gap-3 md:gap-6">
+        
+        <!-- Marka Logosu -->
+        <a href="#" onclick="resetFilters()" class="flex items-center gap-2.5 shrink-0 group">
+          <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-slate-950 shadow-md group-hover:scale-105 transition-transform">
+            <!-- Özel Akü & Şimşek SVG Logosu -->
+            <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="7" width="20" height="14" rx="2.5" fill="#0B192C" stroke="#0B192C"/>
+              <path d="M6 7V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2" stroke="#FACC15"/>
+              <path d="M14 7V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2" stroke="#FACC15"/>
+              <path d="M13 10l-3 4h4l-2 4" stroke="#FACC15" stroke-width="2.2"/>
+            </svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-1">
+              <span class="text-xl sm:text-2xl font-black tracking-tight text-white">YUSEM</span>
+              <span class="text-xl sm:text-2xl font-black tracking-tight text-amber-400">AKÜ</span>
+            </div>
+            <p class="text-[10px] sm:text-[11px] text-slate-300 font-medium -mt-1 tracking-wider">yusemaku.vercel.app • Güç Merkezi</p>
+          </div>
+        </a>
+
+        <!-- Canlı Arama Çubuğu (Masaüstü) -->
+        <div class="hidden md:flex flex-1 max-w-xl relative">
+          <input 
+            type="text" 
+            id="searchInputDesktop"
+            oninput="handleSearch(this.value)"
+            placeholder="Akü ara: 60 Ah, 72 Ah, Start-Stop, Varta, Mutlu, İnci..." 
+            class="w-full bg-slate-900/90 text-white placeholder-slate-400 text-sm rounded-xl pl-11 pr-10 py-3 border border-slate-700 focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/30 transition"
+          />
+          <svg class="w-5 h-5 text-slate-400 absolute left-3.5 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/>
+          </svg>
+          <button id="clearSearchDesktop" onclick="clearSearch()" class="hidden absolute right-3 top-3 text-slate-400 hover:text-white text-xs bg-slate-800 px-2 py-0.5 rounded-md">Temizle</button>
+        </div>
+
+        <!-- Sağ Aksiyon Butonları -->
+        <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+          <!-- Müşteri Destek & Sipariş Hattı Butonu -->
+          <a href="https://wa.me/905349209907?text=Merhaba%20Yusem%20Ak%C3%BC%2C%20sipari%C5%9Fim%20ve%20ak%C3%BC%20se%C3%A7imi%20hakk%C4%B1nda%20destek%20almak%20istiyorum." target="_blank" rel="noopener" class="hidden sm:flex items-center gap-2 bg-slate-800/90 hover:bg-slate-700 border border-slate-700 text-white px-3.5 py-2.5 rounded-xl text-xs font-bold transition">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+            <div class="text-left leading-tight">
+              <div class="text-[10px] text-amber-400 font-semibold">Müşteri & Sipariş Hattı</div>
+              <div>0534 920 99 07</div>
+            </div>
+          </a>
+
+          <!-- Sepet Butonu -->
+          <button onclick="toggleCart(true)" class="relative flex items-center gap-2.5 bg-amber-400 hover:bg-amber-300 active:scale-95 text-slate-950 font-extrabold px-3.5 sm:px-4 py-2.5 rounded-xl shadow-md transition cursor-pointer">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+            <span class="text-xs sm:text-sm">Sepetim</span>
+            <span id="cartBadge" class="bg-slate-950 text-amber-400 text-xs font-black px-2 py-0.5 rounded-full min-w-[24px] text-center">0</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobil Arama Çubuğu -->
+      <div class="mt-3 md:hidden relative">
+        <input 
+          type="text" 
+          id="searchInputMobile"
+          oninput="handleSearch(this.value)"
+          placeholder="Amper, marka veya araç tipi ara (ör. 72 Ah)..." 
+          class="w-full bg-slate-900 text-white placeholder-slate-400 text-sm rounded-xl pl-10 pr-16 py-2.5 border border-slate-700 focus:outline-none focus:border-amber-400"
+        />
+        <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/>
+        </svg>
+        <button id="clearSearchMobile" onclick="clearSearch()" class="hidden absolute right-2.5 top-2 text-slate-300 text-xs bg-slate-800 px-2 py-1 rounded-lg">Temizle</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- KAMPANYA & HAFTANIN YILDIZLARI HERO ALANI (A101/BİM VİTRİN HİSSİ) -->
+  <section class="bg-gradient-to-br from-brand-navy via-slate-900 to-brand-blue text-white relative overflow-hidden">
+    <!-- Dekoratif Arka Plan Izgarası -->
+    <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#FACC15 1px, transparent 1px); background-size: 24px 24px;"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 py-8 sm:py-12 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+        
+        <!-- Sol Kampanya Metni -->
+        <div class="lg:col-span-7 space-y-5">
+          <div class="inline-flex items-center gap-2 bg-amber-400/15 border border-amber-400/40 text-amber-300 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold">
+            <span class="bg-amber-400 text-slate-950 px-2 py-0.5 rounded-full text-[11px] font-black uppercase">Haftanın Yıldızları</span>
+            <span>Yusem Akü Aktüel Kampanya Günleri Başladı!</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight">
+            Aracın İçin En Doğru Aküyü Seç, <br class="hidden sm:inline" />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500">Güvenle Online Öde!</span>
+          </h1>
+
+          <p class="text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
+            Mutlu, Varta, İnci ve Yiğit marka sıfır üretim tarihli akülerde <strong class="text-white">%25'e varan haftalık indirimler</strong> ve 9 taksit fırsatı. Üstelik eski akünü teslim et, ürün başı anında <strong class="text-amber-400">350 TL hurda iade indirimi</strong> kazan!
+          </p>
+
+          <div class="flex flex-wrap items-center gap-3 pt-1">
+            <a href="#katalog" onclick="selectCategory('Haftanın Fırsatları')" class="bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-sm sm:text-base px-6 py-3.5 rounded-xl shadow-lg animate-pulse-glow transition flex items-center gap-2">
+              <span>⚡ Haftanın Fırsatlarını Gör</span>
+            </a>
+            <a href="#aku-bulucu" class="bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold text-sm sm:text-base px-5 py-3.5 rounded-xl transition flex items-center gap-2">
+              <span>🚗 Aracıma Uygun Aküyü Bul</span>
+            </a>
+          </div>
+
+          <!-- Hızlı Avantaj Kartları -->
+          <div class="grid grid-cols-3 gap-2.5 sm:gap-4 pt-3 max-w-xl">
+            <div class="bg-slate-900/70 border border-slate-700/80 rounded-xl p-3">
+              <div class="text-amber-400 font-black text-base sm:text-lg">256-Bit</div>
+              <div class="text-slate-300 text-[11px] sm:text-xs font-medium">3D Secure Kartla Ödeme</div>
+            </div>
+            <div class="bg-slate-900/70 border border-slate-700/80 rounded-xl p-3">
+              <div class="text-emerald-400 font-black text-base sm:text-lg">-350 TL</div>
+              <div class="text-slate-300 text-[11px] sm:text-xs font-medium">Eski Akü İade İndirimi</div>
+            </div>
+            <div class="bg-slate-900/70 border border-slate-700/80 rounded-xl p-3">
+              <div class="text-sky-400 font-black text-base sm:text-lg">24 Ay</div>
+              <div class="text-slate-300 text-[11px] sm:text-xs font-medium">Birebir Resmi Garanti</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sağ Öne Çıkan Kampanya Kartı (A101 Aktüel Broşür Tarzı) -->
+        <div class="lg:col-span-5">
+          <div class="bg-gradient-to-b from-amber-400 to-amber-500 p-1 rounded-2xl shadow-2xl">
+            <div class="bg-slate-950 rounded-xl p-5 sm:p-6 relative overflow-hidden">
+              <div class="flex items-center justify-between mb-3">
+                <span class="bg-red-600 text-white text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider">Haftanın Süper Fırsatı</span>
+                <span class="text-amber-400 text-xs font-bold">Stoklarla Sınırlı</span>
+              </div>
+
+              <div class="flex items-center gap-4 my-4">
+                <!-- Akü İllüstrasyonu -->
+                <div class="w-24 h-24 sm:w-28 sm:h-28 shrink-0 bg-slate-900 rounded-2xl border border-slate-800 flex items-center justify-center p-2">
+                  <svg viewBox="0 0 120 100" class="w-full h-full">
+                    <rect x="15" y="25" width="90" height="62" rx="8" fill="#1E293B" stroke="#FACC15" stroke-width="3"/>
+                    <rect x="25" y="15" width="18" height="10" rx="2" fill="#EF4444"/>
+                    <rect x="77" y="15" width="18" height="10" rx="2" fill="#94A3B8"/>
+                    <text x="34" y="23" fill="white" font-size="9" font-weight="bold" text-anchor="middle">+</text>
+                    <text x="86" y="23" fill="#0F172A" font-size="10" font-weight="bold" text-anchor="middle">-</text>
+                    <rect x="25" y="38" width="70" height="36" rx="4" fill="#0F172A"/>
+                    <text x="60" y="54" fill="#FACC15" font-size="12" font-weight="900" text-anchor="middle">12V 72Ah</text>
+                    <text x="60" y="67" fill="#38BDF8" font-size="9" font-weight="700" text-anchor="middle">680A CCA</text>
+                  </svg>
+                </div>
+
+                <div>
+                  <span class="text-xs font-bold text-amber-400 uppercase">Mutlu Akü • SFB Seri 2</span>
+                  <h2 class="text-lg sm:text-xl font-black text-white leading-snug">Mutlu 12V 72 Ah 680A Binek & Dizel Akü</h2>
+                  <p class="text-xs text-slate-400 mt-1">Yüksek marş gücü, tam kapalı bakım gerektirmeyen sistem.</p>
+                </div>
+              </div>
+
+              <div class="bg-slate-900 rounded-xl p-3.5 border border-slate-800 flex items-center justify-between">
+                <div>
+                  <div class="text-xs text-slate-400 line-through">4.450 TL</div>
+                  <div class="text-2xl sm:text-3xl font-black text-amber-400">3.500 <span class="text-sm font-bold text-white">TL</span></div>
+                  <div class="text-[11px] text-emerald-400 font-semibold">Eski akü iadesiyle 3.140 TL!</div>
+                </div>
+                <button onclick="addToCart(2)" class="bg-amber-400 hover:bg-amber-300 active:scale-95 text-slate-950 font-black text-xs sm:text-sm px-4 py-3 rounded-xl shadow transition cursor-pointer">
+                  + Sepete Ekle
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ARACIMA HANGİ AKÜ UYGUN? HIZLI SEÇİCİ -->
+  <section id="aku-bulucu" class="max-w-7xl mx-auto px-4 -mt-5 relative z-20">
+    <div class="bg-white rounded-2xl shadow-md border border-slate-200 p-4 sm:p-6">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-brand-navy text-amber-400 text-xs font-extrabold px-2.5 py-1 rounded-lg">Akıllı Rehber</span>
+            <h2 class="text-base sm:text-lg font-black text-slate-900">Aracıma Hangi Akü Uygun?</h2>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-500 mt-1">Araç tipini seç, saniyeler içinde doğru amper önerisini ve uyumlu ürünleri listele.</p>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5 flex-1 max-w-3xl">
+          <button onclick="recommendBattery('benzin')" class="vehicle-btn text-left p-3 rounded-xl border border-slate-200 hover:border-amber-400 hover:bg-amber-50/60 transition cursor-pointer" data-type="benzin">
+            <div class="text-xs font-extrabold text-slate-900">🚗 Binek Benzinli</div>
+            <div class="text-[11px] text-slate-500 mt-0.5">Öneri: 60 Ah Akü</div>
+          </button>
+          <button onclick="recommendBattery('dizel')" class="vehicle-btn text-left p-3 rounded-xl border border-slate-200 hover:border-amber-400 hover:bg-amber-50/60 transition cursor-pointer" data-type="dizel">
+            <div class="text-xs font-extrabold text-slate-900">🚙 Binek Dizel</div>
+            <div class="text-[11px] text-slate-500 mt-0.5">Öneri: 72 Ah - 75 Ah</div>
+          </button>
+          <button onclick="recommendBattery('startstop')" class="vehicle-btn text-left p-3 rounded-xl border border-slate-200 hover:border-amber-400 hover:bg-amber-50/60 transition cursor-pointer" data-type="startstop">
+            <div class="text-xs font-extrabold text-slate-900">⚡ Start-Stop Araç</div>
+            <div class="text-[11px] text-slate-500 mt-0.5">Öneri: AGM / EFB Akü</div>
+          </button>
+          <button onclick="recommendBattery('ticari')" class="vehicle-btn text-left p-3 rounded-xl border border-slate-200 hover:border-amber-400 hover:bg-amber-50/60 transition cursor-pointer" data-type="ticari">
+            <div class="text-xs font-extrabold text-slate-900">🚚 Ticari & Kamyon</div>
+            <div class="text-[11px] text-slate-500 mt-0.5">Öneri: 105 Ah - 180 Ah</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Öneri Sonuç Kutusu -->
+      <div id="recommendationBox" class="hidden mt-4 pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-amber-50/80 border border-amber-200 rounded-xl p-3.5">
+        <div class="text-xs sm:text-sm text-slate-800" id="recommendationText"></div>
+        <button onclick="clearRecommendation()" class="text-xs font-bold text-slate-600 hover:text-slate-900 underline shrink-0">Filtreyi Sıfırla</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- KATEGORİLER VE ÜRÜN KATALOĞU -->
+  <main id="katalog" class="max-w-7xl mx-auto px-4 py-8 sm:py-10">
+    
+    <!-- Kategori Sekmeleri (A101/BİM Tarzı Yatay Kaydırılabilir Haplar) -->
+    <div class="mb-5">
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="text-lg sm:text-2xl font-black text-slate-900 tracking-tight">Kategoriler & Kampanyalı Ürünler</h2>
+        <span id="productCountLabel" class="text-xs sm:text-sm font-semibold text-slate-500 bg-white px-3 py-1 rounded-full border border-slate-200">12 ürün listeleniyor</span>
+      </div>
+
+      <div id="categoryTabs" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2">
+        <!-- JS ile dinamik dolacak -->
+      </div>
+    </div>
+
+    <!-- İkincil Filtreler: Marka Seçimi ve Sıralama -->
+    <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <!-- Marka Filtreleri -->
+      <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+        <span class="text-xs font-bold text-slate-500 mr-1 shrink-0">Marka:</span>
+        <div id="brandFilters" class="flex items-center gap-1.5">
+          <!-- JS ile dinamik dolacak -->
+        </div>
+      </div>
+
+      <!-- Sıralama Seçeneği -->
+      <div class="flex items-center gap-2 shrink-0">
+        <label for="sortSelect" class="text-xs font-bold text-slate-500">Sırala:</label>
+        <select id="sortSelect" onchange="handleSort(this.value)" class="bg-slate-50 border border-slate-200 text-slate-800 text-xs font-bold rounded-xl px-3 py-2 focus:outline-none focus:border-amber-400">
+          <option value="featured">Önerilen & Kampanyalı</option>
+          <option value="price-asc">Fiyat: Düşükten Yükseğe</option>
+          <option value="price-desc">Fiyat: Yüksekten Düşüğe</option>
+          <option value="discount">En Yüksek İndirim Oranı</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- ÜRÜN IZGARASI (GRID) -->
+    <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
+      <!-- Ürün kartları JS ile oluşturulacak -->
+    </div>
+
+    <!-- Boş Arama Sonucu Durumu -->
+    <div id="emptyState" class="hidden bg-white rounded-2xl border border-slate-200 p-10 text-center my-6">
+      <div class="text-4xl mb-3">🔍</div>
+      <h3 class="text-lg font-extrabold text-slate-900">Aradığınız kritere uygun ürün bulunamadı</h3>
+      <p class="text-sm text-slate-500 mt-1 mb-4">Farklı bir amper değeri (ör. 60 Ah, 72 Ah) arayabilir veya tüm kategorileri görüntüleyebilirsiniz.</p>
+      <button onclick="resetFilters()" class="bg-brand-navy hover:bg-slate-800 text-white text-sm font-bold px-5 py-2.5 rounded-xl transition">Tüm Ürünleri Göster</button>
+    </div>
+  </main>
+
+  <!-- KURUMSAL GÜVEN & HİZMET BÖLGELERİ -->
+  <section class="bg-white border-t border-slate-200 py-10">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200/80 flex items-start gap-4">
+          <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center shrink-0 text-xl font-black">💳</div>
+          <div>
+            <h3 class="font-extrabold text-slate-900 text-base">Güvenli Online Kartla Ödeme</h3>
+            <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">Visa, Mastercard ve Troy logolu tüm banka ve kredi kartlarınızla 3D Secure güvencesiyle tek çekim veya 9 taksite kadar ödeme yapabilirsiniz.</p>
+          </div>
+        </div>
+
+        <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200/80 flex items-start gap-4">
+          <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 text-xl font-black">♻️</div>
+          <div>
+            <h3 class="font-extrabold text-slate-900 text-base">Eski Akü İade Avantajı</h3>
+            <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">Çevre mevzuatına uygun geri dönüşüm kapsamında eski akünüzü teslim ederek yeni akünüzde anında ek indirim alırsınız.</p>
+          </div>
+        </div>
+
+        <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200/80 flex items-start gap-4">
+          <div class="w-12 h-12 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center shrink-0 text-xl font-black">📦</div>
+          <div>
+            <h3 class="font-extrabold text-slate-900 text-base">Hızlı Kargo & Mağaza Teslim</h3>
+            <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">Siparişleriniz özel korumalı akü ambalajıyla aynı gün kargoya verilir veya dilerseniz Yusem Akü mağazamızdan ücretsiz montajla teslim alınır.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (ALT BİLGİ) -->
+  <footer class="bg-brand-dark text-slate-300 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 py-10">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="md:col-span-2 space-y-3">
+          <div class="flex items-center gap-2">
+            <span class="text-2xl font-black text-white">YUSEM</span>
+            <span class="text-2xl font-black text-amber-400">AKÜ</span>
+            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-0.5 rounded-md ml-1">yusemaku.vercel.app</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-400 max-w-md leading-relaxed">
+            Binek, Start-Stop, hafif ticari, ağır vasıta ve marin akü gruplarında yetkili online satış mağazası. Sıfır üretim tarihli, 2 yıl garantili ürünler ve taksitli kart ödemesi.
+          </p>
+          <div class="pt-2 flex flex-wrap gap-3 text-xs font-semibold">
+            <span class="bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-lg text-amber-400">📍 Merkez: Sanayi Sitesi Akü Caddesi No:42</span>
+            <span class="bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-lg text-emerald-400">🔒 3D Secure Güvenli Alışveriş</span>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-white font-extrabold text-sm mb-3">Hızlı Kategoriler</h4>
+          <ul class="space-y-2 text-xs sm:text-sm text-slate-400">
+            <li><a href="#katalog" onclick="selectCategory('Haftanın Fırsatları')" class="hover:text-amber-400 transition">Haftanın Fırsatları</a></li>
+            <li><a href="#katalog" onclick="selectCategory('Binek Araç Aküleri')" class="hover:text-amber-400 transition">Binek Araç Aküleri</a></li>
+            <li><a href="#katalog" onclick="selectCategory('Start-Stop (AGM / EFB)')" class="hover:text-amber-400 transition">Start-Stop AGM & EFB Aküler</a></li>
+            <li><a href="#katalog" onclick="selectCategory('Ağır Vasıta & Ticari')" class="hover:text-amber-400 transition">Ağır Vasıta & Ticari Aküler</a></li>
+            <li><a href="#katalog" onclick="selectCategory('Takviye & Aksesuar')" class="hover:text-amber-400 transition">Takviye Kablosu & Aksesuar</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white font-extrabold text-sm mb-3">Müşteri Destek & Sipariş Hattı</h4>
+          <p class="text-xs text-slate-400 mb-3">Sipariş durumu, ürün uyumluluğu veya kurumsal alımlar için müşteri destek hattımıza ulaşabilirsiniz.</p>
+          <a href="tel:+905349209907" class="block w-full text-center bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-sm py-2.5 rounded-xl mb-2 transition">
+            📞 0534 920 99 07
+          </a>
+          <button onclick="toggleCart(true)" class="block w-full text-center bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs py-2.5 rounded-xl transition cursor-pointer">
+            💳 Sepeti Görüntüle & Öde
+          </button>
+        </div>
+      </div>
+
+      <div class="border-t border-slate-800/80 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-2">
+        <p>© 2026 Yusem Akü (yusemaku.vercel.app) — Tüm Hakları Saklıdır.</p>
+        <p>Fiyatlara KDV dahildir. Tüm banka ve kredi kartları ile güvenli ödeme yapabilirsiniz.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SAĞ ALT SABİT WHATSAPP DESTEK BUTONU -->
+  <a id="floatingWhatsAppBtn" href="https://wa.me/905349209907?text=Merhaba%20Yusem%20Ak%C3%BC%2C%20online%20sipari%C5%9F%20ve%20ak%C3%BC%20uyumlulu%C4%9Fu%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener" class="fixed bottom-5 right-5 z-30 bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs sm:text-sm px-4 py-3 rounded-full shadow-xl flex items-center gap-2 transition transform hover:scale-105">
+    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
+    <span class="hidden sm:inline">WhatsApp Destek (0534 920 99 07)</span>
+  </a>
+
+  <!-- SEPET & ONLINE ÖDEME ÇEKMECESİ (SLIDE-OVER DRAWER) -->
+  <div id="cartDrawer" class="fixed inset-0 z-50 hidden">
+    <!-- Arka Plan Karartma -->
+    <div onclick="toggleCart(false)" class="absolute inset-0 bg-slate-950/65 backdrop-blur-xs transition-opacity"></div>
+
+    <!-- Sağ Panel -->
+    <div class="absolute inset-y-0 right-0 w-full max-w-lg bg-white shadow-2xl flex flex-col h-full">
+      
+      <!-- Çekmece Başlık & Adım Göstergesi -->
+      <div class="bg-brand-navy text-white px-5 py-4 border-b border-slate-800 shrink-0">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2.5">
+            <span id="drawerHeaderIcon" class="text-xl">🛒</span>
+            <div>
+              <h2 id="drawerHeaderTitle" class="font-black text-base sm:text-lg leading-tight">Alışveriş Sepetim</h2>
+              <p id="drawerHeaderSubtitle" class="text-[11px] text-amber-400 font-medium">1. Adım: Sepet Özeti • 2. Adım: Güvenli Kart Ödemesi</p>
+            </div>
+          </div>
+          <button onclick="toggleCart(false)" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center font-bold text-lg cursor-pointer">✕</button>
+        </div>
+
+        <!-- Adım İlerleme Çubuğu -->
+        <div id="checkoutStepper" class="hidden grid-cols-2 gap-2 mt-3 pt-3 border-t border-slate-800 text-[11px] font-extrabold">
+          <button onclick="setCheckoutStep(1)" id="stepBtn1" class="flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg bg-amber-400 text-slate-950 transition cursor-pointer">
+            <span>1. Sepet & İndirim</span>
+          </button>
+          <button onclick="goToPaymentStep()" id="stepBtn2" class="flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg bg-slate-800 text-slate-300 transition cursor-pointer">
+            <span>2. Teslimat & Kartla Ödeme</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Kaydırılabilir İçerik -->
+      <div id="drawerScrollBody" class="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4">
+        
+        <!-- Sepet Boşsa Mesaj -->
+        <div id="emptyCartMessage" class="text-center py-12">
+          <div class="text-5xl mb-3">🔋</div>
+          <h3 class="font-extrabold text-slate-800 text-base">Sepetiniz şu an boş</h3>
+          <p class="text-xs text-slate-500 mt-1 mb-4">Haftanın fırsatlarından aracınıza uygun aküyü seçip hemen sepete ekleyebilir, kartınızla online ödeyebilirsiniz.</p>
+          <button onclick="toggleCart(false)" class="bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs px-5 py-2.5 rounded-xl cursor-pointer">Ürünlere Göz At</button>
+        </div>
+
+        <!-- ADIM 1: SEPET ÜRÜNLERİ & ESKİ AKÜ İADE İNDİRİMİ -->
+        <div id="step1Container" class="hidden space-y-4">
+          <div id="cartItemsContainer" class="space-y-3">
+            <!-- JS ile dolacak -->
+          </div>
+
+          <!-- Eski Akü İade İndirimi Seçeneği -->
+          <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3.5">
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" id="tradeInCheckbox" checked onchange="renderCart()" class="mt-1 w-4 h-4 accent-emerald-600 rounded cursor-pointer" />
+              <div class="text-xs">
+                <div class="font-extrabold text-emerald-950">♻️ Eski Akümü Teslim Edeceğim (Hurda İadesi)</div>
+                <p class="text-emerald-800 mt-0.5">Teslimat sırasında eski akünüzü vererek <strong class="underline">akü başına 350 TL</strong> anında ekstra indirim kazanırsınız.</p>
+              </div>
+            </label>
+          </div>
+
+          <!-- Fiyat Özeti Kutusu -->
+          <div class="bg-slate-900 text-white rounded-xl p-4 space-y-2 text-xs">
+            <div class="flex justify-between text-slate-300">
+              <span>Ürünler Toplamı:</span>
+              <span id="subtotalText" class="font-bold">0 TL</span>
+            </div>
+            <div id="tradeInRow" class="flex justify-between text-emerald-400">
+              <span>Eski Akü İade İndirimi:</span>
+              <span id="tradeInDiscountText" class="font-bold">-0 TL</span>
+            </div>
+            <div class="flex justify-between text-slate-300">
+              <span>Kargo & Teslimat:</span>
+              <span class="text-amber-400 font-bold">ÜCRETSİZ</span>
+            </div>
+            <div class="border-t border-slate-700 pt-2 flex justify-between items-center text-sm sm:text-base">
+              <span class="font-extrabold">Ödenecek Net Tutar:</span>
+              <span id="grandTotalText" class="font-black text-amber-400 text-lg">0 TL</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ADIM 2: TESLİMAT BİLGİLERİ & ONLINE KARTLA ÖDEME EKRANI -->
+        <div id="step2Container" class="hidden space-y-4">
+          
+          <!-- Üst Mini Tutar & Geri Dön Barı -->
+          <div class="bg-slate-900 text-white rounded-xl px-4 py-3 flex items-center justify-between">
+            <button onclick="setCheckoutStep(1)" class="text-xs font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1 cursor-pointer">
+              <span>← Sepete Dön</span>
+            </button>
+            <div class="text-right">
+              <span class="text-[11px] text-slate-400 block">Ödenecek Toplam</span>
+              <span id="step2TotalBadge" class="text-base font-black text-amber-400">0 TL</span>
+            </div>
+          </div>
+
+          <!-- Teslimat & Alıcı Bilgileri -->
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-slate-900">1. Teslimat & Alıcı Bilgileri</span>
+              <span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">Ücretsiz Kargo</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <div>
+                <label class="block text-[11px] font-bold text-slate-700 mb-1">Ad Soyad *</label>
+                <input type="text" id="custName" placeholder="Örn: Ahmet Yılmaz" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-amber-500" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-700 mb-1">Telefon Numarası *</label>
+                <input type="tel" id="custPhone" placeholder="05XX XXX XX XX" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-amber-500" />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <div>
+                <label class="block text-[11px] font-bold text-slate-700 mb-1">Teslimat Yöntemi</label>
+                <select id="deliveryTypeSelect" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-semibold focus:outline-none focus:border-amber-500">
+                  <option value="Adrese Hızlı Kargo / Yerinde Teslim">📦 Adrese Hızlı Kargo / Teslimat</option>
+                  <option value="Mağazadan Ücretsiz Montajlı Teslim">🏪 Mağazadan Teslim & Ücretsiz Montaj</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-700 mb-1">Araç Marka / Model (Opsiyonel)</label>
+                <input type="text" id="custCar" placeholder="Örn: Renault Megane 1.5 dCi" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-amber-500" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-bold text-slate-700 mb-1">Teslimat Adresi (İl / İlçe / Açık Adres) *</label>
+              <textarea id="custAddress" rows="2" placeholder="Mahalle, sokak, bina no, ilçe ve il..." class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-amber-500"></textarea>
+            </div>
+          </div>
+
+          <!-- Ödeme Yöntemi Seçici -->
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-3">
+            <div class="text-xs font-black text-slate-900">2. Ödeme Yöntemi Seçin</div>
+            
+            <div class="grid grid-cols-2 gap-2">
+              <button type="button" onclick="selectPaymentTab('card')" id="payTabCard" class="p-2.5 rounded-xl border-2 border-amber-500 bg-amber-50/70 text-left transition cursor-pointer">
+                <div class="text-xs font-black text-slate-950">💳 Kredi / Banka Kartı</div>
+                <div class="text-[10px] text-slate-600 font-semibold">Online 3D Secure • 9 Taksit</div>
+              </button>
+              <button type="button" onclick="selectPaymentTab('eft')" id="payTabEft" class="p-2.5 rounded-xl border border-slate-200 bg-white text-left hover:border-slate-300 transition cursor-pointer">
+                <div class="text-xs font-black text-slate-950">🏦 Havale / EFT</div>
+                <div class="text-[10px] text-slate-600 font-semibold">IBAN ile Anında Transfer</div>
+              </button>
+            </div>
+
+            <!-- KREDİ / BANKA KARTI FORMU -->
+            <div id="creditCardFormSection" class="space-y-3.5 pt-1">
+              
+              <!-- CANLI 3D KREDİ KARTI ÖNİZLEMESİ -->
+              <div class="perspective-1000 w-full max-w-xs mx-auto h-44 select-none">
+                <div id="visualCardInner" class="relative w-full h-full preserve-3d">
+                  
+                  <!-- KART ÖN YÜZ -->
+                  <div class="absolute inset-0 backface-hidden rounded-2xl bg-gradient-to-br from-slate-900 via-brand-navy to-slate-800 text-white p-5 shadow-xl border border-slate-700/80 flex flex-col justify-between overflow-hidden">
+                    <div class="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-amber-400/15 blur-xl pointer-events-none"></div>
+                    
+                    <div class="flex items-center justify-between">
+                      <!-- EMV Çip SVG -->
+                      <div class="w-10 h-7 rounded-md bg-gradient-to-tr from-amber-300 to-yellow-500 border border-amber-200/60 flex items-center justify-center">
+                        <div class="w-6 h-4 border border-slate-800/40 rounded-xs"></div>
+                      </div>
+                      <!-- Kart Markası (Visa / Mastercard / Troy) -->
+                      <div id="cardBrandBadge" class="text-xs font-black tracking-wider uppercase px-2.5 py-1 rounded-md bg-white/10 text-amber-300">
+                        BANKA / KREDİ KARTI
+                      </div>
+                    </div>
+
+                    <div class="my-auto pt-2">
+                      <div id="visualCardNumber" class="font-mono text-base sm:text-lg tracking-widest font-bold text-slate-100">
+                        •••• •••• •••• ••••
+                      </div>
+                    </div>
+
+                    <div class="flex items-end justify-between text-xs">
+                      <div class="min-w-0 pr-2">
+                        <div class="text-[9px] uppercase tracking-wider text-slate-400">Kart Sahibi</div>
+                        <div id="visualCardHolder" class="font-bold tracking-wide uppercase truncate text-slate-100">AD SOYAD</div>
+                      </div>
+                      <div class="text-right shrink-0">
+                        <div class="text-[9px] uppercase tracking-wider text-slate-400">Son Kul.</div>
+                        <div id="visualCardExpiry" class="font-mono font-bold text-slate-100">AA/YY</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- KART ARKA YÜZ (CVV) -->
+                  <div class="absolute inset-0 backface-hidden rotate-y-180 rounded-2xl bg-gradient-to-br from-slate-800 via-slate-900 to-slate-950 text-white py-5 shadow-xl border border-slate-700 flex flex-col justify-between">
+                    <div class="w-full h-9 bg-slate-950 mt-1"></div>
+                    <div class="px-5">
+                      <div class="text-[9px] uppercase text-slate-400 text-right mb-1">Güvenlik Kodu (CVV)</div>
+                      <div class="bg-white text-slate-950 rounded-md h-8 px-3 flex items-center justify-end font-mono font-black tracking-widest text-sm">
+                        <span id="visualCardCvv">•••</span>
+                      </div>
+                    </div>
+                    <div class="px-5 flex items-center justify-between text-[10px] text-slate-400">
+                      <span>256-Bit SSL Koruma</span>
+                      <span class="text-amber-400 font-bold">YUSEM AKÜ PAY</span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- Kart Giriş Alanları -->
+              <div class="space-y-2.5">
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">Kart Üzerindeki Ad Soyad *</label>
+                  <input 
+                    type="text" 
+                    id="cardHolderInput" 
+                    oninput="handleCardHolderInput(this.value)"
+                    onfocus="flipCard(false)"
+                    placeholder="KART SAHİBİNİN ADI SOYADI" 
+                    class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs uppercase font-semibold focus:outline-none focus:border-amber-500" 
+                  />
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">Kart Numarası (16 Hane) *</label>
+                  <input 
+                    type="text" 
+                    id="cardNumberInput" 
+                    inputmode="numeric"
+                    maxlength="19"
+                    oninput="handleCardNumberInput(this)"
+                    onfocus="flipCard(false)"
+                    placeholder="0000 0000 0000 0000" 
+                    class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-mono font-bold tracking-wider focus:outline-none focus:border-amber-500" 
+                  />
+                </div>
+
+                <div class="grid grid-cols-2 gap-2.5">
+                  <div>
+                    <label class="block text-[11px] font-bold text-slate-700 mb-1">Son Kullanma (AA/YY) *</label>
+                    <input 
+                      type="text" 
+                      id="cardExpiryInput" 
+                      inputmode="numeric"
+                      maxlength="5"
+                      oninput="handleCardExpiryInput(this)"
+                      onfocus="flipCard(false)"
+                      placeholder="AA/YY" 
+                      class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-mono font-bold focus:outline-none focus:border-amber-500" 
+                    />
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-bold text-slate-700 mb-1">Güvenlik Kodu (CVV) *</label>
+                    <input 
+                      type="password" 
+                      id="cardCvvInput" 
+                      inputmode="numeric"
+                      maxlength="4"
+                      oninput="handleCardCvvInput(this)"
+                      onfocus="flipCard(true)"
+                      onblur="flipCard(false)"
+                      placeholder="•••" 
+                      class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-mono font-bold focus:outline-none focus:border-amber-500" 
+                    />
+                  </div>
+                </div>
+
+                <!-- Taksit Seçenekleri -->
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">Taksit Seçeneği</label>
+                  <select id="installmentSelect" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:border-amber-500">
+                    <!-- JS ile tutara göre dinamik hesaplanır -->
+                  </select>
+                </div>
+
+                <!-- 3D Secure Onay Kutusu -->
+                <label class="flex items-center gap-2 bg-white border border-slate-200 rounded-lg p-2.5 cursor-pointer">
+                  <input type="checkbox" id="secure3dCheck" checked class="w-4 h-4 accent-emerald-600 rounded cursor-pointer" />
+                  <span class="text-[11px] font-bold text-slate-700">🔒 3D Secure güvenlik doğrulaması ile ödeme yapmak istiyorum.</span>
+                </label>
+
+                <!-- Bilgilendirme Notu (iyzico / PayTR Hazır Altyapı) -->
+                <div class="bg-sky-50 border border-sky-200 rounded-lg p-2.5 text-[11px] text-sky-900">
+                  <strong>ℹ️ Test / Demo Ödeme Arayüzü:</strong> Herhangi bir geçerli formatta 16 haneli kart bilgisi girerek ödeme akışını test edebilirsiniz. Canlı satışta <strong>iyzico / PayTR Sanal POS API</strong> anahtarı bağlanarak gerçek tahsilat alınır.
+                </div>
+              </div>
+            </div>
+
+            <!-- HAVALE / EFT BİLGİ ALANI -->
+            <div id="eftFormSection" class="hidden space-y-2.5 pt-1">
+              <div class="bg-white border border-slate-200 rounded-xl p-3 text-xs space-y-1.5">
+                <div class="font-extrabold text-slate-900">Yusem Akü Kurumsal Banka Hesabı</div>
+                <div class="text-slate-600">Alıcı: <strong class="text-slate-900">YUSEM AKÜ OTOMOTİV LTD. ŞTİ.</strong></div>
+                <div class="bg-slate-100 p-2 rounded-lg font-mono text-[11px] font-bold text-slate-800 select-all">
+                  TR00 0006 2000 0000 0000 0000 00
+                </div>
+                <p class="text-[11px] text-slate-500">Açıklama kısmına adınızı ve telefon numaranızı yazmanız yeterlidir.</p>
+              </div>
+            </div>
+
+            <!-- Form Hata Mesajı Kutusu -->
+            <div id="formErrorBox" class="hidden bg-red-50 border border-red-200 text-red-700 text-xs font-semibold p-2.5 rounded-lg"></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Alt Sabit Aksiyon Butonu -->
+      <div id="cartFooter" class="hidden p-4 bg-white border-t border-slate-200 shrink-0">
+        <!-- Adım 1 Butonu: Ödemeye Geç -->
+        <button id="proceedToPayBtn" onclick="goToPaymentStep()" class="w-full bg-amber-400 hover:bg-amber-300 active:scale-[0.99] text-slate-950 font-black text-sm py-3.5 px-4 rounded-xl shadow-lg flex items-center justify-center gap-2 transition cursor-pointer">
+          <span>💳 Ödemeye Geç (Kart Bilgileri)</span>
+          <span>→</span>
+        </button>
+
+        <!-- Adım 2 Butonu: Kartla Ödemeyi Tamamla -->
+        <button id="completeCardPaymentBtn" onclick="processOnlinePayment()" class="hidden w-full bg-emerald-600 hover:bg-emerald-500 active:scale-[0.99] text-white font-black text-sm py-3.5 px-4 rounded-xl shadow-lg flex items-center justify-center gap-2 transition cursor-pointer">
+          <span id="payButtonLabel">🔒 Güvenli Ödemeyi Tamamla</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3D SECURE SMS DOĞRULAMA SİMÜLASYON MODALI -->
+  <div id="secure3dModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-xs"></div>
+    <div class="bg-white rounded-2xl max-w-sm w-full p-5 sm:p-6 relative z-10 shadow-2xl border border-slate-200 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="bg-brand-navy text-amber-400 text-[10px] font-black px-2 py-1 rounded">3D SECURE</span>
+          <span class="font-extrabold text-slate-900 text-sm">Banka SMS Doğrulama</span>
+        </div>
+        <span class="text-xs font-mono font-bold text-slate-400">SSL</span>
+      </div>
+
+      <div class="bg-slate-50 rounded-xl p-3 text-xs space-y-1 border border-slate-200">
+        <div class="flex justify-between">
+          <span class="text-slate-500">İşyeri:</span>
+          <span class="font-bold text-slate-900">YUSEM AKÜ (yusemaku.vercel.app)</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-500">İşlem Tutarı:</span>
+          <span id="modal3dAmount" class="font-black text-emerald-700">0 TL</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-500">Kart No:</span>
+          <span id="modal3dCardMask" class="font-mono font-bold text-slate-800">•••• •••• •••• 0000</span>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs font-bold text-slate-700 mb-1">Telefonunuza Gelen 6 Haneli Doğrulama Kodu</label>
+        <input type="text" id="sms3dCodeInput" maxlength="6" value="482910" class="w-full text-center font-mono text-lg font-black tracking-[0.35em] bg-white border-2 border-amber-400 rounded-xl py-2.5 focus:outline-none" />
+        <p class="text-[11px] text-slate-500 mt-1 text-center">Demo doğrulama kodu otomatik doldurulmuştur.</p>
+      </div>
+
+      <div class="flex gap-2">
+        <button onclick="cancel3dModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs py-3 rounded-xl cursor-pointer">Vazgeç</button>
+        <button onclick="confirm3dPayment()" id="confirm3dBtn" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs py-3 rounded-xl shadow cursor-pointer">Onayla ve Öde ✓</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SİPARİŞ & ÖDEME ONAY MAKBUZU MODALI -->
+  <div id="orderPreviewModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+    <div onclick="closeOrderModal()" class="absolute inset-0 bg-slate-950/75 backdrop-blur-xs"></div>
+    <div class="bg-white rounded-2xl max-w-md w-full p-5 sm:p-6 relative z-10 shadow-2xl border border-slate-200">
+      <div class="flex items-center justify-between mb-3">
+        <div class="flex items-center gap-2.5">
+          <span class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-black text-lg">✓</span>
+          <div>
+            <h3 id="receiptModalTitle" class="font-black text-slate-900 text-base sm:text-lg leading-tight">Ödeme & Sipariş Onaylandı!</h3>
+            <p id="receiptOrderNumber" class="text-xs font-mono font-bold text-emerald-700">Sipariş No: #EA-2026-1042</p>
+          </div>
+        </div>
+        <button onclick="closeOrderModal()" class="text-slate-400 hover:text-slate-700 font-bold text-lg cursor-pointer">✕</button>
+      </div>
+
+      <p class="text-xs text-slate-600 mb-3">
+        Siparişiniz başarıyla oluşturuldu. Aşağıdaki dijital makbuzu saklayabilir veya tek tıkla <strong>Yusem Akü WhatsApp Hattına (0534 920 99 07)</strong> iletebilirsiniz:
+      </p>
+
+      <pre id="orderMessagePreview" class="bg-slate-100 border border-slate-200 rounded-xl p-3 text-[11px] font-mono text-slate-800 whitespace-pre-wrap max-h-56 overflow-y-auto mb-4"></pre>
+
+      <div class="flex flex-col sm:flex-row gap-2">
+        <a id="directWhatsAppLink" href="#" target="_blank" rel="noopener" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs py-3 px-4 rounded-xl text-center transition">
+          Makbuzu WhatsApp'a Gönder ↗
+        </a>
+        <button onclick="copyOrderText()" id="copyOrderBtn" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3 px-4 rounded-xl transition cursor-pointer">
+          Makbuzu Kopyala
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BİLDİRİM TOAST MESAJI -->
+  <div id="toastNotification" class="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white text-xs sm:text-sm font-bold px-4 py-3 rounded-xl shadow-xl border border-amber-400/50 flex items-center gap-2 opacity-0 pointer-events-none transition-all duration-300">
+    <span class="text-amber-400">⚡</span>
+    <span id="toastText">Ürün sepete eklendi!</span>
+  </div>
+
+  <script>
+    // ==========================================
+    // 1. VERİ TABANI (ÜRÜNLER & KATEGORİLER)
+    // ==========================================
+    const WHATSAPP_PHONE = "905349209907"; // Aktif WhatsApp Sipariş Hattı: 0534 920 99 07
+    const DISPLAY_PHONE = "0534 920 99 07";
+    const TRADE_IN_DISCOUNT_PER_BATTERY = 350; // Eski akü iade indirimi (TL)
+
+    const categories = [
+      { id: "Tümü", icon: "⚡", label: "Tüm Ürünler" },
+      { id: "Haftanın Fırsatları", icon: "🔥", label: "Haftanın Fırsatları" },
+      { id: "Binek Araç Aküleri", icon: "🚗", label: "Binek Araç Aküleri" },
+      { id: "Start-Stop (AGM / EFB)", icon: "🔋", label: "Start-Stop (AGM / EFB)" },
+      { id: "Ağır Vasıta & Ticari", icon: "🚚", label: "Ağır Vasıta & Ticari" },
+      { id: "Motosiklet & Marin", icon: "🏍️", label: "Motosiklet & Marin" },
+      { id: "Takviye & Aksesuar", icon: "🔌", label: "Takviye & Aksesuar" }
+    ];
+
+    const brands = ["Tümü", "Mutlu", "Varta", "İnci Akü", "Yiğit Akü", "Eren Pro"];
+
+    const products = [
+      {
+        id: 1,
+        name: "Mutlu 12V 60 Ah 540A SFB Seri 2 Binek Akü",
+        brand: "Mutlu",
+        category: "Binek Araç Aküleri",
+        isWeeklyDeal: true,
+        badge: "Haftanın Yıldızı",
+        specs: "12V • 60 Ah • 540A CCA",
+        dimensions: "242 x 175 x 190 mm",
+        oldPrice: 3650,
+        price: 2890,
+        isBattery: true,
+        accentColor: "#EF4444"
+      },
+      {
+        id: 2,
+        name: "Mutlu 12V 72 Ah 680A SFB Seri 2 Dizel & Binek Akü",
+        brand: "Mutlu",
+        category: "Binek Araç Aküleri",
+        isWeeklyDeal: true,
+        badge: "%22 İndirim",
+        specs: "12V • 72 Ah • 680A CCA",
+        dimensions: "278 x 175 x 190 mm",
+        oldPrice: 4450,
+        price: 3490,
+        isBattery: true,
+        accentColor: "#EF4444"
+      },
+      {
+        id: 3,
+        name: "Varta Blue Dynamic 12V 60 Ah 540A D24 Akü",
+        brand: "Varta",
+        category: "Binek Araç Aküleri",
+        isWeeklyDeal: true,
+        badge: "Çok Satan",
+        specs: "12V • 60 Ah • 540A (EN)",
+        dimensions: "242 x 175 x 190 mm",
+        oldPrice: 3900,
+        price: 3150,
+        isBattery: true,
+        accentColor: "#2563EB"
+      },
+      {
+        id: 4,
+        name: "Varta Silver Dynamic AGM 12V 70 Ah 760A Start-Stop",
+        brand: "Varta",
+        category: "Start-Stop (AGM / EFB)",
+        isWeeklyDeal: true,
+        badge: "Start-Stop Özel",
+        specs: "12V • 70 Ah AGM • 760A",
+        dimensions: "278 x 175 x 190 mm",
+        oldPrice: 6800,
+        price: 5490,
+        isBattery: true,
+        accentColor: "#F59E0B"
+      },
+      {
+        id: 5,
+        name: "İnci Akü Formul A 12V 60 Ah 540A Alçak Tip Akü",
+        brand: "İnci Akü",
+        category: "Binek Araç Aküleri",
+        isWeeklyDeal: false,
+        badge: "Fiyat / Performans",
+        specs: "12V • 60 Ah • 540A CCA",
+        dimensions: "242 x 175 x 175 mm",
+        oldPrice: 3400,
+        price: 2750,
+        isBattery: true,
+        accentColor: "#0284C7"
+      },
+      {
+        id: 6,
+        name: "İnci Akü EFB Max 12V 65 Ah 650A Start-Stop Akü",
+        brand: "İnci Akü",
+        category: "Start-Stop (AGM / EFB)",
+        isWeeklyDeal: false,
+        badge: "EFB Teknoloji",
+        specs: "12V • 65 Ah EFB • 650A",
+        dimensions: "242 x 175 x 190 mm",
+        oldPrice: 4950,
+        price: 4150,
+        isBattery: true,
+        accentColor: "#0284C7"
+      },
+      {
+        id: 7,
+        name: "Yiğit Akü Prestige 12V 75 Ah 720A Yüksek Güç Akü",
+        brand: "Yiğit Akü",
+        category: "Binek Araç Aküleri",
+        isWeeklyDeal: true,
+        badge: "Haftanın Yıldızı",
+        specs: "12V • 75 Ah • 720A CCA",
+        dimensions: "278 x 175 x 190 mm",
+        oldPrice: 4200,
+        price: 3290,
+        isBattery: true,
+        accentColor: "#16A34A"
+      },
+      {
+        id: 8,
+        name: "Mutlu 12V 105 Ah 850A Hafif Ticari & Minibüs Aküsü",
+        brand: "Mutlu",
+        category: "Ağır Vasıta & Ticari",
+        isWeeklyDeal: false,
+        badge: "Ticari Güç",
+        specs: "12V • 105 Ah • 850A CCA",
+        dimensions: "330 x 172 x 240 mm",
+        oldPrice: 5900,
+        price: 4990,
+        isBattery: true,
+        accentColor: "#EF4444"
+      },
+      {
+        id: 9,
+        name: "Yiğit Akü Heavy Duty 12V 180 Ah 1100A Kamyon & Tır",
+        brand: "Yiğit Akü",
+        category: "Ağır Vasıta & Ticari",
+        isWeeklyDeal: true,
+        badge: "Ağır Hizmet",
+        specs: "12V • 180 Ah • 1100A",
+        dimensions: "513 x 223 x 223 mm",
+        oldPrice: 9200,
+        price: 7650,
+        isBattery: true,
+        accentColor: "#16A34A"
+      },
+      {
+        id: 10,
+        name: "Varta Powersports AGM 12V 9 Ah Motosiklet Aküsü",
+        brand: "Varta",
+        category: "Motosiklet & Marin",
+        isWeeklyDeal: false,
+        badge: "Kuru Tip AGM",
+        specs: "12V • 9 Ah • 135A CCA",
+        dimensions: "150 x 87 x 105 mm",
+        oldPrice: 1650,
+        price: 1320,
+        isBattery: true,
+        accentColor: "#2563EB"
+      },
+      {
+        id: 11,
+        name: "İnci Akü Marine & Karavan 12V 100 Ah Deep Cycle",
+        brand: "İnci Akü",
+        category: "Motosiklet & Marin",
+        isWeeklyDeal: false,
+        badge: "Derin Döngü",
+        specs: "12V • 100 Ah • Marin/Solar",
+        dimensions: "353 x 175 x 190 mm",
+        oldPrice: 6400,
+        price: 5350,
+        isBattery: true,
+        accentColor: "#0284C7"
+      },
+      {
+        id: 12,
+        name: "Yusem Pro 600A Tam Bakır 3.5 Metre Akü Takviye Kablosu",
+        brand: "Yusem Pro",
+        category: "Takviye & Aksesuar",
+        isWeeklyDeal: true,
+        badge: "Bagajda Şart",
+        specs: "600 Amper • 3.5m • Taşıma Çantalı",
+        dimensions: "Tam İzoleli Maşa",
+        oldPrice: 850,
+        price: 590,
+        isBattery: false,
+        accentColor: "#F59E0B"
+      }
+    ];
+
+    // ==========================================
+    // 2. UYGULAMA DURUMU (STATE)
+    // ==========================================
+    let state = {
+      selectedCategory: "Tümü",
+      selectedBrand: "Tümü",
+      searchQuery: "",
+      sortBy: "featured",
+      cart: [], // { productId, qty }
+      checkoutStep: 1,
+      paymentMethod: "card" // "card" | "eft"
+    };
+
+    // ==========================================
+    // 3. YARDIMCI FORMAT VE SVG GÖRSEL ÜRETİCİ
+    // ==========================================
+    function formatPrice(amount) {
+      return amount.toLocaleString("tr-TR") + " TL";
+    }
+
+    function getProductIllustration(product) {
+      if (!product.isBattery) {
+        return `
+          <svg viewBox="0 0 120 90" class="w-28 h-24 mx-auto">
+            <path d="M25 65 C35 25, 85 25, 95 65" fill="none" stroke="#EF4444" stroke-width="6" stroke-linecap="round"/>
+            <path d="M30 72 C40 35, 80 35, 90 72" fill="none" stroke="#1E293B" stroke-width="6" stroke-linecap="round"/>
+            <rect x="16" y="58" width="16" height="12" rx="3" fill="#DC2626"/>
+            <rect x="88" y="58" width="16" height="12" rx="3" fill="#0F172A"/>
+            <text x="60" y="22" fill="#0F172A" font-size="11" font-weight="900" text-anchor="middle">600A BAKIR</text>
+          </svg>
+        `;
+      }
+
+      const ampMatch = product.specs.match(/(\d+\s*Ah)/i);
+      const ampText = ampMatch ? ampMatch[1] : "12V";
+
+      return `
+        <svg viewBox="0 0 130 95" class="w-32 h-24 mx-auto">
+          <rect x="18" y="22" width="94" height="62" rx="8" fill="#0F172A" stroke="${product.accentColor}" stroke-width="3"/>
+          <rect x="28" y="12" width="16" height="10" rx="2" fill="#EF4444"/>
+          <rect x="86" y="12" width="16" height="10" rx="2" fill="#94A3B8"/>
+          <text x="36" y="20" fill="white" font-size="9" font-weight="bold" text-anchor="middle">+</text>
+          <text x="94" y="20" fill="#0F172A" font-size="10" font-weight="bold" text-anchor="middle">-</text>
+          <rect x="28" y="34" width="74" height="38" rx="5" fill="#1E293B"/>
+          <text x="65" y="50" fill="#FACC15" font-size="12" font-weight="900" text-anchor="middle">${ampText}</text>
+          <text x="65" y="64" fill="#E2E8F0" font-size="8.5" font-weight="700" text-anchor="middle">${product.brand.toUpperCase()}</text>
+        </svg>
+      `;
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("toastNotification");
+      const toastText = document.getElementById("toastText");
+      toastText.textContent = message;
+      toast.classList.remove("opacity-0", "translate-y-2");
+      toast.classList.add("opacity-100", "translate-y-0");
+
+      clearTimeout(window.toastTimer);
+      window.toastTimer = setTimeout(() => {
+        toast.classList.remove("opacity-100", "translate-y-0");
+        toast.classList.add("opacity-0", "translate-y-2");
+      }, 2400);
+    }
+
+    // ==========================================
+    // 4. KATEGORİ, MARKA VE ÜRÜN RENDER İŞLEMLERİ
+    // ==========================================
+    function renderCategoryTabs() {
+      const container = document.getElementById("categoryTabs");
+      if (!container) return;
+
+      container.innerHTML = categories.map(cat => {
+        const isActive = state.selectedCategory === cat.id;
+        return `
+          <button 
+            onclick="selectCategory('${cat.id}')" 
+            class="shrink-0 flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition cursor-pointer ${
+              isActive 
+                ? "bg-brand-navy text-amber-400 shadow-md ring-2 ring-amber-400" 
+                : "bg-white text-slate-700 border border-slate-200 hover:border-amber-400 hover:bg-amber-50/40"
+            }">
+            <span>${cat.icon}</span>
+            <span>${cat.label}</span>
+          </button>
+        `;
+      }).join("");
+    }
+
+    function renderBrandFilters() {
+      const container = document.getElementById("brandFilters");
+      if (!container) return;
+
+      container.innerHTML = brands.map(brand => {
+        const isActive = state.selectedBrand === brand;
+        return `
+          <button 
+            onclick="selectBrand('${brand}')" 
+            class="shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer ${
+              isActive 
+                ? "bg-amber-400 text-slate-950 shadow-xs" 
+                : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+            }">
+            ${brand}
+          </button>
+        `;
+      }).join("");
+    }
+
+    function getFilteredProducts() {
+      let filtered = products.filter(p => {
+        const matchesCategory =
+          state.selectedCategory === "Tümü"
+            ? true
+            : state.selectedCategory === "Haftanın Fırsatları"
+              ? p.isWeeklyDeal
+              : p.category === state.selectedCategory;
+
+        const matchesBrand =
+          state.selectedBrand === "Tümü" ? true : p.brand === state.selectedBrand;
+
+        const q = state.searchQuery.toLowerCase().trim();
+        const matchesSearch =
+          !q ||
+          p.name.toLowerCase().includes(q) ||
+          p.brand.toLowerCase().includes(q) ||
+          p.category.toLowerCase().includes(q) ||
+          p.specs.toLowerCase().includes(q);
+
+        return matchesCategory && matchesBrand && matchesSearch;
+      });
+
+      if (state.sortBy === "price-asc") {
+        filtered.sort((a, b) => a.price - b.price);
+      } else if (state.sortBy === "price-desc") {
+        filtered.sort((a, b) => b.price - a.price);
+      } else if (state.sortBy === "discount") {
+        filtered.sort((a, b) => {
+          const discA = (a.oldPrice - a.price) / a.oldPrice;
+          const discB = (b.oldPrice - b.price) / b.oldPrice;
+          return discB - discA;
+        });
+      }
+
+      return filtered;
+    }
+
+    function renderProducts() {
+      const grid = document.getElementById("productGrid");
+      const emptyState = document.getElementById("emptyState");
+      const countLabel = document.getElementById("productCountLabel");
+      if (!grid) return;
+
+      const list = getFilteredProducts();
+      countLabel.textContent = `${list.length} ürün listeleniyor`;
+
+      if (list.length === 0) {
+        grid.innerHTML = "";
+        emptyState.classList.remove("hidden");
+        return;
+      }
+
+      emptyState.classList.add("hidden");
+
+      grid.innerHTML = list.map(product => {
+        const discountPercent = Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100);
+        const tradeInPrice = Math.max(0, product.price - TRADE_IN_DISCOUNT_PER_BATTERY);
+
+        return `
+          <div class="bg-white rounded-2xl border border-slate-200 hover:border-amber-400 shadow-sm hover:shadow-xl transition-all duration-200 flex flex-col justify-between overflow-hidden group">
+            <div>
+              <!-- Üst Etiket Alanı -->
+              <div class="px-4 pt-3.5 flex items-center justify-between gap-2">
+                <span class="bg-brand-navy text-amber-400 text-[10px] font-black px-2.5 py-1 rounded-lg uppercase tracking-wide">
+                  ${product.badge}
+                </span>
+                <span class="bg-red-600 text-white text-[11px] font-black px-2 py-0.5 rounded-md">
+                  -%${discountPercent}
+                </span>
+              </div>
+
+              <!-- Ürün Görsel Alanı -->
+              <div class="my-3 px-4 py-3 bg-slate-50/80 mx-3 rounded-xl border border-slate-100 group-hover:scale-[1.02] transition-transform">
+                ${getProductIllustration(product)}
+              </div>
+
+              <!-- Ürün Bilgi Alanı -->
+              <div class="px-4 space-y-1.5">
+                <div class="flex items-center justify-between text-[11px] font-bold text-slate-500">
+                  <span class="text-brand-blue uppercase">${product.brand}</span>
+                  <span>${product.dimensions}</span>
+                </div>
+                <h3 class="font-extrabold text-slate-900 text-sm sm:text-[15px] leading-snug line-clamp-2 min-h-[40px]">
+                  ${product.name}
+                </h3>
+                <div class="inline-block bg-slate-100 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-md">
+                  ${product.specs}
+                </div>
+              </div>
+            </div>
+
+            <!-- Fiyat & Sepete Ekle Alanı -->
+            <div class="p-4 pt-3 mt-3 border-t border-slate-100">
+              <div class="flex items-end justify-between gap-2 mb-3">
+                <div>
+                  <div class="text-xs text-slate-400 line-through font-semibold">${formatPrice(product.oldPrice)}</div>
+                  <div class="text-xl font-black text-slate-950">${formatPrice(product.price)}</div>
+                  ${
+                    product.isBattery
+                      ? `<div class="text-[11px] font-bold text-emerald-600">Eski akü iadesiyle: ${formatPrice(tradeInPrice)}</div>`
+                      : `<div class="text-[11px] font-semibold text-slate-500">Aynı gün ücretsiz kargo</div>`
+                  }
+                </div>
+              </div>
+
+              <button 
+                onclick="addToCart(${product.id})" 
+                class="w-full bg-amber-400 hover:bg-amber-300 active:scale-[0.98] text-slate-950 font-black text-xs sm:text-sm py-2.5 px-4 rounded-xl shadow-xs flex items-center justify-center gap-1.5 transition cursor-pointer">
+                <span>+ Sepete Ekle</span>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    // ==========================================
+    // 5. FİLTRELEME, ARAMA VE ARAÇ REHBERİ
+    // ==========================================
+    function selectCategory(categoryId) {
+      state.selectedCategory = categoryId;
+      renderCategoryTabs();
+      renderProducts();
+    }
+
+    function selectBrand(brand) {
+      state.selectedBrand = brand;
+      renderBrandFilters();
+      renderProducts();
+    }
+
+    function handleSearch(val) {
+      state.searchQuery = val;
+      const dInput = document.getElementById("searchInputDesktop");
+      const mInput = document.getElementById("searchInputMobile");
+      if (dInput && dInput.value !== val) dInput.value = val;
+      if (mInput && mInput.value !== val) mInput.value = val;
+
+      const hasVal = val.trim().length > 0;
+      document.getElementById("clearSearchDesktop")?.classList.toggle("hidden", !hasVal);
+      document.getElementById("clearSearchMobile")?.classList.toggle("hidden", !hasVal);
+
+      renderProducts();
+    }
+
+    function clearSearch() {
+      handleSearch("");
+    }
+
+    function handleSort(val) {
+      state.sortBy = val;
+      renderProducts();
+    }
+
+    function resetFilters() {
+      state.selectedCategory = "Tümü";
+      state.selectedBrand = "Tümü";
+      state.sortBy = "featured";
+      const sortEl = document.getElementById("sortSelect");
+      if (sortEl) sortEl.value = "featured";
+      clearRecommendation(false);
+      clearSearch();
+      renderCategoryTabs();
+      renderBrandFilters();
+      renderProducts();
+    }
+
+    function recommendBattery(type) {
+      document.querySelectorAll(".vehicle-btn").forEach(btn => {
+        const active = btn.dataset.type === type;
+        btn.classList.toggle("border-amber-500", active);
+        btn.classList.toggle("bg-amber-50", active);
+      });
+
+      const box = document.getElementById("recommendationBox");
+      const text = document.getElementById("recommendationText");
+      box.classList.remove("hidden");
+
+      if (type === "benzin") {
+        text.innerHTML = `<strong>🚗 Binek Benzinli Araç Önerisi:</strong> Standart binek benzinli araçlar için en uygun kapasite <strong>60 Ah</strong> akülerdir. Uyumlu 60 Ah modeller listelendi.`;
+        state.selectedCategory = "Binek Araç Aküleri";
+        state.searchQuery = "60 Ah";
+      } else if (type === "dizel") {
+        text.innerHTML = `<strong>🚙 Binek Dizel Araç Önerisi:</strong> Yüksek marş gücü gerektiren dizel araçlar için <strong>72 Ah - 75 Ah</strong> aküler önerilir. Uyumlu modeller aşağıda listelendi.`;
+        state.selectedCategory = "Binek Araç Aküleri";
+        state.searchQuery = "7";
+      } else if (type === "startstop") {
+        text.innerHTML = `<strong>⚡ Start-Stop Araç Önerisi:</strong> Start-Stop sistemli araçlarda standart akü kullanılmamalıdır; aracınıza özel <strong>AGM / EFB</strong> aküler listelendi.`;
+        state.selectedCategory = "Start-Stop (AGM / EFB)";
+        state.searchQuery = "";
+      } else if (type === "ticari") {
+        text.innerHTML = `<strong>🚚 Ticari & Ağır Vasıta Önerisi:</strong> Minibüs, kamyonet ve tır grupları için yüksek dayanımlı <strong>105 Ah - 180 Ah</strong> aküler listelendi.`;
+        state.selectedCategory = "Ağır Vasıta & Ticari";
+        state.searchQuery = "";
+      }
+
+      renderCategoryTabs();
+      renderProducts();
+      document.getElementById("katalog")?.scrollIntoView({ behavior: "smooth" });
+    }
+
+    function clearRecommendation(shouldRender = true) {
+      document.querySelectorAll(".vehicle-btn").forEach(btn => {
+        btn.classList.remove("border-amber-500", "bg-amber-50");
+      });
+      document.getElementById("recommendationBox")?.classList.add("hidden");
+      if (shouldRender) {
+        state.selectedCategory = "Tümü";
+        state.searchQuery = "";
+        renderCategoryTabs();
+        renderProducts();
+      }
+    }
+
+    // ==========================================
+    // 6. SEPET & ONLINE ÖDEME YÖNETİMİ
+    // ==========================================
+    function updateCartBadge() {
+      const totalItems = state.cart.reduce((sum, item) => sum + item.qty, 0);
+      const badge = document.getElementById("cartBadge");
+      if (badge) badge.textContent = totalItems;
+    }
+
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+
+      const existing = state.cart.find(item => item.productId === productId);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        state.cart.push({ productId, qty: 1 });
+      }
+
+      updateCartBadge();
+      showToast(`"${product.name}" sepete eklendi!`);
+    }
+
+    function updateQty(productId, delta) {
+      const index = state.cart.findIndex(item => item.productId === productId);
+      if (index === -1) return;
+
+      state.cart[index].qty += delta;
+      if (state.cart[index].qty <= 0) {
+        state.cart.splice(index, 1);
+      }
+
+      updateCartBadge();
+      renderCart();
+    }
+
+    function toggleCart(open) {
+      const drawer = document.getElementById("cartDrawer");
+      if (open) {
+        state.checkoutStep = 1;
+        renderCart();
+        drawer.classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+      } else {
+        drawer.classList.add("hidden");
+        document.body.style.overflow = "";
+      }
+    }
+
+    function getCartTotals() {
+      let subtotal = 0;
+      let eligibleBatteryCount = 0;
+
+      state.cart.forEach(item => {
+        const product = products.find(p => p.id === item.productId);
+        subtotal += product.price * item.qty;
+        if (product.isBattery) {
+          eligibleBatteryCount += item.qty;
+        }
+      });
+
+      const tradeInEl = document.getElementById("tradeInCheckbox");
+      const hasTradeIn = tradeInEl ? tradeInEl.checked : true;
+      const tradeInDiscount = hasTradeIn ? eligibleBatteryCount * TRADE_IN_DISCOUNT_PER_BATTERY : 0;
+      const grandTotal = Math.max(0, subtotal - tradeInDiscount);
+
+      return { subtotal, eligibleBatteryCount, hasTradeIn, tradeInDiscount, grandTotal };
+    }
+
+    function setCheckoutStep(step) {
+      state.checkoutStep = step;
+      const step1 = document.getElementById("step1Container");
+      const step2 = document.getElementById("step2Container");
+      const proceedBtn = document.getElementById("proceedToPayBtn");
+      const completeBtn = document.getElementById("completeCardPaymentBtn");
+      const stepBtn1 = document.getElementById("stepBtn1");
+      const stepBtn2 = document.getElementById("stepBtn2");
+      const title = document.getElementById("drawerHeaderTitle");
+      const icon = document.getElementById("drawerHeaderIcon");
+
+      document.getElementById("formErrorBox").classList.add("hidden");
+
+      if (step === 1) {
+        step1.classList.remove("hidden");
+        step2.classList.add("hidden");
+        proceedBtn.classList.remove("hidden");
+        completeBtn.classList.add("hidden");
+
+        stepBtn1.className = "flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg bg-amber-400 text-slate-950 transition cursor-pointer";
+        stepBtn2.className = "flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg bg-slate-800 text-slate-300 transition cursor-pointer";
+        title.textContent = "Alışveriş Sepetim";
+        icon.textContent = "🛒";
+      } else {
+        step1.classList.add("hidden");
+        step2.classList.remove("hidden");
+        proceedBtn.classList.add("hidden");
+        completeBtn.classList.remove("hidden");
+
+        stepBtn1.className = "flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg bg-slate-800 text-emerald-400 transition cursor-pointer";
+        stepBtn2.className = "flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg bg-amber-400 text-slate-950 transition cursor-pointer";
+        title.textContent = "Güvenli Kartla Ödeme";
+        icon.textContent = "💳";
+
+        updateInstallmentOptions();
+        updatePayButtonLabel();
+      }
+
+      document.getElementById("drawerScrollBody").scrollTop = 0;
+    }
+
+    function goToPaymentStep() {
+      if (state.cart.length === 0) return;
+      setCheckoutStep(2);
+    }
+
+    function selectPaymentTab(method) {
+      state.paymentMethod = method;
+      const cardTab = document.getElementById("payTabCard");
+      const eftTab = document.getElementById("payTabEft");
+      const cardForm = document.getElementById("creditCardFormSection");
+      const eftForm = document.getElementById("eftFormSection");
+
+      if (method === "card") {
+        cardTab.className = "p-2.5 rounded-xl border-2 border-amber-500 bg-amber-50/70 text-left transition cursor-pointer";
+        eftTab.className = "p-2.5 rounded-xl border border-slate-200 bg-white text-left hover:border-slate-300 transition cursor-pointer";
+        cardForm.classList.remove("hidden");
+        eftForm.classList.add("hidden");
+      } else {
+        eftTab.className = "p-2.5 rounded-xl border-2 border-amber-500 bg-amber-50/70 text-left transition cursor-pointer";
+        cardTab.className = "p-2.5 rounded-xl border border-slate-200 bg-white text-left hover:border-slate-300 transition cursor-pointer";
+        eftForm.classList.remove("hidden");
+        cardForm.classList.add("hidden");
+      }
+      updatePayButtonLabel();
+    }
+
+    function updateInstallmentOptions() {
+      const { grandTotal } = getCartTotals();
+      document.getElementById("step2TotalBadge").textContent = formatPrice(grandTotal);
+
+      const select = document.getElementById("installmentSelect");
+      const options = [
+        { count: 1, rate: 1.00, label: `Tek Çekim — ${formatPrice(grandTotal)}` },
+        { count: 3, rate: 1.03, label: `3 Taksit — 3 x ${formatPrice(Math.ceil((grandTotal * 1.03) / 3))} (Toplam ${formatPrice(Math.ceil(grandTotal * 1.03))})` },
+        { count: 6, rate: 1.06, label: `6 Taksit — 6 x ${formatPrice(Math.ceil((grandTotal * 1.06) / 6))} (Toplam ${formatPrice(Math.ceil(grandTotal * 1.06))})` },
+        { count: 9, rate: 1.09, label: `9 Taksit — 9 x ${formatPrice(Math.ceil((grandTotal * 1.09) / 9))} (Toplam ${formatPrice(Math.ceil(grandTotal * 1.09))})` }
+      ];
+
+      select.innerHTML = options.map(o => `<option value="${o.label}">${o.label}</option>`).join("");
+    }
+
+    function updatePayButtonLabel() {
+      const { grandTotal } = getCartTotals();
+      const label = document.getElementById("payButtonLabel");
+      if (state.paymentMethod === "card") {
+        label.textContent = `🔒 Kartla Güvenli Öde (${formatPrice(grandTotal)})`;
+      } else {
+        label.textContent = `✓ Havale / EFT Siparişini Onayla (${formatPrice(grandTotal)})`;
+      }
+    }
+
+    // ==========================================
+    // KREDİ KARTI CANLI FORMATLAMA & ÇEVİRME
+    // ==========================================
+    function flipCard(toBack) {
+      const cardInner = document.getElementById("visualCardInner");
+      if (!cardInner) return;
+      if (toBack) {
+        cardInner.classList.add("rotate-y-180");
+      } else {
+        cardInner.classList.remove("rotate-y-180");
+      }
+    }
+
+    function handleCardHolderInput(val) {
+      const cleaned = val.trim();
+      document.getElementById("visualCardHolder").textContent = cleaned ? cleaned.toUpperCase() : "AD SOYAD";
+    }
+
+    function handleCardNumberInput(input) {
+      let digits = input.value.replace(/\D/g, "").substring(0, 16);
+      let formatted = digits.replace(/(.{4})/g, "$1 ").trim();
+      input.value = formatted;
+
+      // Görsel kart üzerine yaz
+      const padded = digits.padEnd(16, "•").replace(/(.{4})/g, "$1 ").trim();
+      document.getElementById("visualCardNumber").textContent = padded;
+
+      // Kart şeması tespiti (Visa / Mastercard / Troy)
+      const badge = document.getElementById("cardBrandBadge");
+      if (digits.startsWith("4")) {
+        badge.textContent = "VISA";
+        badge.className = "text-xs font-black tracking-wider uppercase px-2.5 py-1 rounded-md bg-blue-500/30 text-sky-300";
+      } else if (/^(5[1-5]|2[2-7])/.test(digits)) {
+        badge.textContent = "MASTERCARD";
+        badge.className = "text-xs font-black tracking-wider uppercase px-2.5 py-1 rounded-md bg-orange-500/30 text-amber-300";
+      } else if (digits.startsWith("9792")) {
+        badge.textContent = "TROY";
+        badge.className = "text-xs font-black tracking-wider uppercase px-2.5 py-1 rounded-md bg-cyan-500/30 text-cyan-200";
+      } else {
+        badge.textContent = "BANKA / KREDİ KARTI";
+        badge.className = "text-xs font-black tracking-wider uppercase px-2.5 py-1 rounded-md bg-white/10 text-amber-300";
+      }
+    }
+
+    function handleCardExpiryInput(input) {
+      let digits = input.value.replace(/\D/g, "").substring(0, 4);
+      if (digits.length >= 3) {
+        input.value = digits.substring(0, 2) + "/" + digits.substring(2);
+      } else {
+        input.value = digits;
+      }
+      document.getElementById("visualCardExpiry").textContent = input.value || "AA/YY";
+    }
+
+    function handleCardCvvInput(input) {
+      let digits = input.value.replace(/\D/g, "").substring(0, 4);
+      input.value = digits;
+      document.getElementById("visualCardCvv").textContent = digits ? "•".repeat(digits.length) : "•••";
+    }
+
+    function renderCart() {
+      const container = document.getElementById("cartItemsContainer");
+      const emptyMsg = document.getElementById("emptyCartMessage");
+      const step1 = document.getElementById("step1Container");
+      const step2 = document.getElementById("step2Container");
+      const stepper = document.getElementById("checkoutStepper");
+      const cartFooter = document.getElementById("cartFooter");
+
+      if (state.cart.length === 0) {
+        container.innerHTML = "";
+        emptyMsg.classList.remove("hidden");
+        step1.classList.add("hidden");
+        step2.classList.add("hidden");
+        stepper.classList.add("hidden");
+        stepper.classList.remove("grid");
+        cartFooter.classList.add("hidden");
+        return;
+      }
+
+      emptyMsg.classList.add("hidden");
+      stepper.classList.remove("hidden");
+      stepper.classList.add("grid");
+      cartFooter.classList.remove("hidden");
+
+      container.innerHTML = state.cart.map(item => {
+        const product = products.find(p => p.id === item.productId);
+        const lineTotal = product.price * item.qty;
+
+        return `
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 flex items-center justify-between gap-3">
+            <div class="min-w-0 flex-1">
+              <div class="text-[11px] font-bold text-brand-blue">${product.brand} • ${product.specs.split("•")[1] || ""}</div>
+              <h4 class="text-xs sm:text-sm font-extrabold text-slate-900 truncate">${product.name}</h4>
+              <div class="text-xs font-black text-slate-950 mt-1">${formatPrice(lineTotal)}</div>
+            </div>
+
+            <div class="flex items-center gap-1.5 bg-white border border-slate-200 rounded-lg p-1 shrink-0">
+              <button onclick="updateQty(${product.id}, -1)" class="w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200 font-black text-slate-800 flex items-center justify-center cursor-pointer">-</button>
+              <span class="w-6 text-center text-xs font-black">${item.qty}</span>
+              <button onclick="updateQty(${product.id}, 1)" class="w-7 h-7 rounded-md bg-amber-400 hover:bg-amber-300 font-black text-slate-950 flex items-center justify-center cursor-pointer">+</button>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      const { subtotal, tradeInDiscount, grandTotal } = getCartTotals();
+
+      document.getElementById("subtotalText").textContent = formatPrice(subtotal);
+      document.getElementById("tradeInDiscountText").textContent = `-${formatPrice(tradeInDiscount)}`;
+      document.getElementById("tradeInRow").classList.toggle("opacity-40", tradeInDiscount === 0);
+      document.getElementById("grandTotalText").textContent = formatPrice(grandTotal);
+
+      setCheckoutStep(state.checkoutStep);
+    }
+
+    function processOnlinePayment() {
+      const name = document.getElementById("custName").value.trim();
+      const phone = document.getElementById("custPhone").value.trim();
+      const address = document.getElementById("custAddress").value.trim();
+      const errorBox = document.getElementById("formErrorBox");
+
+      if (!name || !phone || !address) {
+        errorBox.textContent = "⚠️ Lütfen Ad Soyad, Telefon ve Teslimat Adresi alanlarını eksiksiz doldurun.";
+        errorBox.classList.remove("hidden");
+        return;
+      }
+
+      if (state.paymentMethod === "card") {
+        const holder = document.getElementById("cardHolderInput").value.trim();
+        const cardDigits = document.getElementById("cardNumberInput").value.replace(/\D/g, "");
+        const expiry = document.getElementById("cardExpiryInput").value.trim();
+        const cvv = document.getElementById("cardCvvInput").value.trim();
+
+        if (!holder || cardDigits.length < 16 || expiry.length < 5 || cvv.length < 3) {
+          errorBox.textContent = "⚠️ Lütfen Kart Üzerindeki İsim, 16 haneli Kart Numarası, Son Kullanma Tarihi (AA/YY) ve CVV bilgilerini eksiksiz girin.";
+          errorBox.classList.remove("hidden");
+          return;
+        }
+
+        errorBox.classList.add("hidden");
+
+        // 3D Secure seçiliyse SMS doğrulama penceresini aç
+        if (document.getElementById("secure3dCheck").checked) {
+          const { grandTotal } = getCartTotals();
+          document.getElementById("modal3dAmount").textContent = formatPrice(grandTotal);
+          document.getElementById("modal3dCardMask").textContent = `•••• •••• •••• ${cardDigits.slice(-4)}`;
+          document.getElementById("secure3dModal").classList.remove("hidden");
+          return;
+        }
+      }
+
+      errorBox.classList.add("hidden");
+      finalizePaidOrder();
+    }
+
+    function cancel3dModal() {
+      document.getElementById("secure3dModal").classList.add("hidden");
+    }
+
+    function confirm3dPayment() {
+      const btn = document.getElementById("confirm3dBtn");
+      btn.textContent = "Ödeme İşleniyor...";
+      btn.disabled = true;
+
+      setTimeout(() => {
+        btn.textContent = "Onayla ve Öde ✓";
+        btn.disabled = false;
+        document.getElementById("secure3dModal").classList.add("hidden");
+        finalizePaidOrder();
+      }, 900);
+    }
+
+    function finalizePaidOrder() {
+      const name = document.getElementById("custName").value.trim();
+      const phone = document.getElementById("custPhone").value.trim();
+      const car = document.getElementById("custCar").value.trim() || "Belirtilmedi";
+      const address = document.getElementById("custAddress").value.trim();
+      const delivery = document.getElementById("deliveryTypeSelect").value;
+      const { subtotal, hasTradeIn, tradeInDiscount, grandTotal } = getCartTotals();
+
+      const orderCode = `EA-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+
+      let paymentSummaryLine = "";
+      if (state.paymentMethod === "card") {
+        const cardDigits = document.getElementById("cardNumberInput").value.replace(/\D/g, "");
+        const installment = document.getElementById("installmentSelect").value;
+        paymentSummaryLine = `Online Kredi/Banka Kartı (Sonu ${cardDigits.slice(-4)} • 3D Secure Onaylı)\n• Taksit Planı: ${installment}`;
+      } else {
+        paymentSummaryLine = "Havale / EFT (Banka Transferi)";
+      }
+
+      const itemLines = state.cart.map((item, index) => {
+        const p = products.find(prod => prod.id === item.productId);
+        const lineTotal = p.price * item.qty;
+        return `${index + 1}. ${p.name} (${item.qty} Adet) - ${formatPrice(lineTotal)}`;
+      }).join("\n");
+
+      const receiptText = 
+`✅ *YUSEM AKÜ (yusemaku.vercel.app) - SİPARİŞ & ÖDEME MAKBUZU*
+Sipariş No: *#${orderCode}*
+Ödeme Durumu: *${state.paymentMethod === "card" ? "KART İLE ÖDENDİ ✓" : "HAVALE / EFT BEKLENİYOR"}*
+
+*Alıcı & Teslimat Bilgileri:*
+• Ad Soyad: ${name}
+• Telefon: ${phone}
+• Araç: ${car}
+• Teslimat: ${delivery}
+• Adres: ${address}
+
+*Sipariş İçeriği:*
+${itemLines}
+
+*Ödeme Detayı:*
+• Ara Toplam: ${formatPrice(subtotal)}
+• Eski Akü İadesi: ${hasTradeIn ? `Evet (-${formatPrice(tradeInDiscount)})` : "Hayır (0 TL)"}
+• Ödeme Yöntemi: ${paymentSummaryLine}
+• *TAHSİL EDİLEN NET TUTAR: ${formatPrice(grandTotal)}*`;
+
+      const waUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(receiptText)}`;
+
+      document.getElementById("receiptOrderNumber").textContent = `Sipariş No: #${orderCode}`;
+      document.getElementById("orderMessagePreview").textContent = receiptText;
+      document.getElementById("directWhatsAppLink").href = waUrl;
+
+      // Sepeti sıfırla
+      state.cart = [];
+      state.checkoutStep = 1;
+      updateCartBadge();
+      toggleCart(false);
+
+      document.getElementById("orderPreviewModal").classList.remove("hidden");
+    }
+
+    function closeOrderModal() {
+      document.getElementById("orderPreviewModal").classList.add("hidden");
+    }
+
+    function copyOrderText() {
+      const text = document.getElementById("orderMessagePreview").textContent;
+      const tempArea = document.createElement("textarea");
+      tempArea.value = text;
+      document.body.appendChild(tempArea);
+      tempArea.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempArea);
+
+      const btn = document.getElementById("copyOrderBtn");
+      btn.textContent = "✓ Kopyalandı!";
+      setTimeout(() => { btn.textContent = "Makbuzu Kopyala"; }, 2000);
+    }
+
+    // ==========================================
+    // 7. BAŞLANGIÇ ÇALIŞTIRMA
+    // ==========================================
+    window.addEventListener("DOMContentLoaded", () => {
+      renderCategoryTabs();
+      renderBrandFilters();
+      renderProducts();
+    });
+  </script>
+</body>
+</html>
